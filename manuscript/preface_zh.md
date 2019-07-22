@@ -1,13 +1,13 @@
-# Functional-Light JavaScript
-# Preface
+# JavaScript 函数式编程之光
+# 前言
 
-> *A monad is just a monoid in the category of endofunctors.*
+> *一个自函子范畴上的幺半群。（A monad is just a monoid in the category of endofunctors.）*
 
-Did I just lose you? Don't worry, I'd be lost, too! All those terms that only mean something to the already-initiated in Functional Programming&trade; (FP) are just jumbled nonsense to many of the rest of us.
+我是不是让你非常的迷惘？别担心，我也感到非常迷惑！这些专业解释只有对已经掌握了函数式编程（Functional Programming&trade; (FP)）的人有意义，对于我们其他人来说只是一些专业术语无意义的堆砌。
 
-This book is not going to teach you what those words mean. If that's what you're looking for, keep looking. In fact, there are already plenty of great books that teach FP the *right way*, from the top-down. Those words have important meanings and if you formally study FP in-depth, you'll absolutely want to get familiar with them.
+本书不会教你这些词的含义。如果这正是你想要了解的东西的话，那么可以放下本书了。实际上，已经有很多讲授函数式编程的书籍了，而且非常不错，他们通过自顶向下的方式，来说明什么是函数式编程的*正确的方式*。这些术语具有非常重要的意义，如果你要正式深入学习函数式编程的话，你绝对想要搞清楚这些术语的含义。
 
-But this book is going to approach the topic quite differently. I'm going to present fundamental FP concepts from the ground-up, with fewer special or non-intuitive terms than most approaches to FP. We'll try to take a practical approach to each principle rather than a purely academic angle. **There will be terms**, no doubt. But we'll be careful and deliberate about introducing them and explaining why they're important.
+但是这本书将以完全不同的方式来探讨这个主题。我将从头开始介绍函数式的基础概念，尽量少的使用特殊或那些让人困惑的专业术语。我们将尝试使用更加贴近编程实战的方式来探讨每一个话题，而不是从学院派的角度进行讲解。毫无疑问，我们**会接触到术语**。但是在介绍这些术语的时候，我们会非常小心谨慎，并且解释他们存在的重要性。
 
 Sadly, I am not a card-carrying member of the FP Cool Kids Club. I've never been formally taught anything about FP. And though I have a CS academic background and I am decent at math, mathematical notation is not how my brain understands programming. I have never written a line of Scheme, Clojure, or Haskell. I'm not an old-school Lisp'r.
 
