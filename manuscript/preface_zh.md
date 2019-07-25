@@ -9,15 +9,15 @@
 
 但是这本书将以完全不同的方式来探讨这个主题。我将从头开始介绍函数式的基础概念，尽量少的使用特殊或那些让人困惑的专业术语。我们将尝试使用更加贴近编程实战的方式来探讨每一个话题，而不是从学院派的角度进行讲解。毫无疑问，我们**会接触到术语**。但是在介绍这些术语的时候，我们会非常小心谨慎，并且解释他们存在的重要性。
 
-Sadly, I am not a card-carrying member of the FP Cool Kids Club. I've never been formally taught anything about FP. And though I have a CS academic background and I am decent at math, mathematical notation is not how my brain understands programming. I have never written a line of Scheme, Clojure, or Haskell. I'm not an old-school Lisp'r.
+遗憾的是，我不是正统函数式编程俱乐部的一员，也从未正式地教过关于函数编程的任何东西。虽然我有计算机的教育背景，数学也不错，但是各种数学符号不是我理解编程的思维方式。我从未写过 Scheme，Clojure 或者 Haskell，也不是老牌的 Lisp 程序员。
 
-I *have* attended countless conference talks about FP, each one with the desperate clinging hope that finally, *this time* would be the time I understood what this whole functional programming mysticism is all about. And each time, I came away frustrated and reminded that those terms got all mixed up in my head and I had no idea if or what I learned. Maybe I learned things. But I couldn't figure out what those things were for the longest time.
+我参加过无数次关于函数式编程的技术大会，每一次都抱着希望而去，心里想着*这次*我肯定能够理解函数式编程教义的全部内容！然而每一次，都是失望而归，脑海中充斥着各种专业术语，不知道自己学到了个啥。很长一段时间，我都无法搞清这些术语是什么意思。
 
-Little by little, across those various exposures, I teased out bits and pieces of important concepts that seem to just come all too naturally to the formal FPer. I learned them slowly and I learned them pragmatically and experientially, not academically with appropriate terminology. Have you ever known a thing for a long time, and only later found out it had a specific name you never knew!?
+渐渐的，在这些专业术语中浸淫的久了，我慢慢的有了一些头绪，理解了一些非常重要的概念，然而这些概念对于老牌的函数式编程使用者来说非常自然和容易理解。我通过不断的编码实践来慢慢地学习它们，而不是通过学习学院派的术语名词。不知道你们有没有过这种经历，很早之前就了解一个技术，然后在很长一段时候之后，才发现它居然有个专有名词！
 
-Maybe you're like me; I heard terms such as "map-reduce" around industry segments like "big data" for years with no real idea what they were. Eventually I learned what the `map(..)` function did -- all long before I had any idea that list operations were a cornerstone of the FPer path and what makes them so important. I knew what *map* was long before I ever knew it was called `map(..)`.
+也许你也和我一样；多年来，我一直听到诸如“大数据”等行业细分领域的“map-reduce”这样的术语，但是并没有真正的了解它们是什么。就像终于有一天我明白了 `map(..)` 函数做了什么——但在此之前，我丝毫不知道列表操作是函数式编程的基石，而且如此重要。我很早就明白*map*的作用，但是后来才明白 `map(..)` 是专有名词。
 
-Eventually I began to gather all these tidbits of understanding into what I now call "Functional-Light Programming" (FLP).
+后来，我开始收集这些顿悟的花絮，并写成了这本《JavaScript 函数式编程之光》。
 
 ## Mission
 
