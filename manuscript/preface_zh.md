@@ -1,7 +1,8 @@
 # JavaScript 函数式编程之光
+
 # 前言
 
-> *一个自函子范畴上的幺半群。（A monad is just a monoid in the category of endofunctors.）*
+> _一个自函子范畴上的幺半群。（A monad is just a monoid in the category of endofunctors.）_
 
 我是不是让你非常的迷惘？别担心，我也感到非常迷惑！这些专业解释只有对已经掌握了函数式编程（Functional Programming&trade; (FP)）的人有意义，对于我们其他人来说只是一些专业术语无意义的堆砌。
 
@@ -25,8 +26,6 @@
 
 近些年来，我开始对一些观点深信不疑，*几乎*到了宗教信仰的程度。我认为编程的根本是关于人，而不是关于代码。我认为代码首先而且最重要的功能，是作为人类交流沟通的手段，同时恰巧有个*副作用*（此处有笑声），可以被计算机运行。
 
-The way I see it, functional programming is at its heart about using patterns in your code that are well-known, understandable, *and* proven to keep away the mistakes that make code harder to understand. In that view, FP -- or, ahem, FLP! -- might be one of the most important collections of tools any developer could acquire.
-
 我认为函数式编程的核心在于，使用了一些广为人知、易于理解的编程模式，*并且*被证实能够避免出现难以理解错误。从这个角度来说，FP 或者本书 FLP——可能是任何开发人员可以获得的最重要的编程工具之一。
 
 > monad 诅咒是指……一旦你理解了 monad……就失去了向其他人解释它的能力。
@@ -37,7 +36,7 @@ The way I see it, functional programming is at its heart about using patterns in
 
 I hope this book "Maybe" breaks the spirit of that curse, even though we won't talk about "monads" until the very end in the appendices.
 
-The formal FPer will often assert that the *real value* of FP is in using it essentially 100%: it's an all-or-nothing proposition. The belief is that if you use FP in one part of your program but not in another, the whole program is polluted by the non-FP stuff and therefore suffers enough that the FP was probably not worth it.
+The formal FPer will often assert that the _real value_ of FP is in using it essentially 100%: it's an all-or-nothing proposition. The belief is that if you use FP in one part of your program but not in another, the whole program is polluted by the non-FP stuff and therefore suffers enough that the FP was probably not worth it.
 
 I'll say unequivocally: **I think that absolutism is bogus**. That's as silly to me as suggesting that this book is only good if I use perfect grammar and active voice throughout; if I make any mistakes, it degrades the entire book's quality. Nonsense.
 
