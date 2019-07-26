@@ -34,16 +34,16 @@
 >
 > https://www.youtube.com/watch?v=dkZFtimgAcM
 
-I hope this book "Maybe" breaks the spirit of that curse, even though we won't talk about "monads" until the very end in the appendices.
+我希望这本书“可能”打破了上面所说的魔咒，尽管我们直到最后的附录中才会谈及 monad。
 
-The formal FPer will often assert that the _real value_ of FP is in using it essentially 100%: it's an all-or-nothing proposition. The belief is that if you use FP in one part of your program but not in another, the whole program is polluted by the non-FP stuff and therefore suffers enough that the FP was probably not worth it.
+函数式编程老炮儿会断言说 FP _真正的价值_ 在于 100% 的使用它：这是一个全有或全无的二元命题。他们的教义是，如果在程序中只有部分使用了 FP，整个程序都会被非 FP 的部分污染，这会带来很多问题，因此在这种情况下使用 FP 可能并不值得。
 
-I'll say unequivocally: **I think that absolutism is bogus**. That's as silly to me as suggesting that this book is only good if I use perfect grammar and active voice throughout; if I make any mistakes, it degrades the entire book's quality. Nonsense.
+我会非常明确地说：**我认为这种绝对主义是错误的**。就好比这本书只有文法准确并且全用主动语态才是对的一样，如果犯了任何语法错误，都会降低本书的质量，我认为这种观点是愚蠢的，毫无道理可言。
 
-The better I am at writing in a clear, consistent voice, the better your reading experience will be. But I'm not a 100% perfect author. Some parts will be better written than others. The parts where I can still improve are not going to invalidate the other parts of this book which are useful.
+作为作者，我的行文越清晰，风格越是统一，你们的阅读体验就会越好。但我不是一个十全十美的作家。本书中有些章节可能会比其他的章节写的要好，但是那些有待提高的章节并不会让写的好的章节作废。
 
-And so it goes with our code. The more you can apply these principles to more parts of your code, the better your code will be. Use them well 25% of the time, and you'll get some good benefit. Use them 80% of the time, and you'll see even more benefit.
+这个道理对于代码来说也是一样的。在代码中使用越多的函数式实践，会让你的代码越好。如果你有 25% 的部分正确的使用了函数式编程，你会得到相应的好处。如果有达到了 80%，就会得到更多的好处。
 
-With perhaps a few exceptions, I don't think you'll find many absolutes in this text. We'll instead talk about aspirations, goals, principles to strive for. We'll talk about balance and pragmatism and trade-offs.
+也许会有一些例外，但在本书中你不会找到许多绝对主义的东西。我们将谈到愿景，目标和需要遵守的一些原则。我们也将讨论平衡，实用主义和一些权衡。
 
-Welcome to this journey into the most useful and practical foundations of FP. We both have plenty to learn!
+欢迎来到最有用最贴近实战的基础函数式编程之旅。我们都还有许多东西需要一起学习！
