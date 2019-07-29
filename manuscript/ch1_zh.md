@@ -1,21 +1,21 @@
-# Functional-Light JavaScript
-# Chapter 1: Why Functional Programming?
+# JavaScipt 函数式编程之光
+# 第一章：为什么使用函数式编程
 
-> Functional programmer: (noun) One who names variables "x", names functions "f", and names code patterns "zygohistomorphic prepromorphism"
+> 函数式程序员：（名词）。将变量命名为 “x”，将函数命名为 “f”，将代码模式称为“zygohistomorphic prepromorphism”（译者注：反正你看不懂的名词）的人。
 >
-> James Iry @jamesiry 5/13/15
+> —— James Iry @jamesiry 5/13/15
 >
 > https://twitter.com/jamesiry/status/598547781515485184
 
-Functional Programming (FP) is not a new concept by any means. It's been around almost the entire history of programming. However, and I'm not sure it's fair to say, but... it sure hasn't seemed like as mainstream of a concept in the overall developer world until perhaps the last few years. I think FP has more been the realm of academics.
+函数式编程（FP）不是一个新的概念。它存在于整个编程的历史中。然而，虽然我不确定这样说是否有失公允，但是……直到最近几年，在开发者中，函数式编程似乎一直不是主流的编程范式。我认为函数式更加学院派一些。
 
-That's all changing, though. A groundswell of interest is growing around FP, not just at the languages level but even in libraries and frameworks. You very well might be reading this text because you've finally realized FP is something you can't ignore any longer. Or maybe you're like me and you've tried to learn FP many times before but struggled to wade through all the terms or mathematical notation.
+但是一切都在改变。人们对函数式越来越感兴趣，这不仅体现在编程语言层面，函数式在三方库和框架中的应用也越来越多。你也发现了无法再忽视函数式编程，所以正在阅读本书。或许你和我一样，曾多次尝试过学习函数式编程，却深陷无边的专业术语和数学符号的泥沼之中。
 
-This first chapter's purpose is to answer questions like "Why should I use FP style with my code?" and "How does Functional-Light JavaScript compare to what others say about FP?" After we've laid that groundwork, throughout the rest of the book we'll uncover, piece by piece, the techniques and patterns for writing JS in Functional-Light style.
+第一章的目的在于回答以下问题：“我为什么要在代码中使用函数式的编程风格？”以及“本书所讲的函数式与他人口中的有何不同？”。在奠定了基础之后，我们会在后续内容中逐一介绍如何在 JS 中使用函数式编程风格代码的技巧和模式。
 
-## At a Glance
+## 管中窥豹
 
-Let's briefly illustrate the notion of "Functional-Light JavaScript" with a before-and-after snapshot of code. Consider:
+让我们通过代码前后对比的方式来简要展示一下书中会涉及到的概念。代码如下：
 
 ```js
 var numbers = [4,10,0,27,42,17,15,-6,58];
@@ -48,7 +48,7 @@ function outputMsg() {
 }
 ```
 
-Now consider a very different style that accomplishes exactly the same outcome:
+现在让我们用另一种完全不同的编程风格来完成同样的事情：
 
 ```js
 var sumOnlyFavorites = FP.compose( [
@@ -72,11 +72,11 @@ function sum(x,y) { return x + y; }
 function constructMsg(v) { return `The magic number is: ${v}`; }
 ```
 
-Once you understand FP and Functional-Light, this is likely how you'd *read* and mentally process that second snippet:
+一旦你明白了函数式或者轻量级函数式编程，在*阅读*到第二段代码的时候，内心的活动可能如下：
 
-> We're first creating a function called `sumOnlyFavorites(..)` that's a combination of three other functions. We combine two filters, one checking if a value is greater-than-or-equal to 10 and one for less-than-or-equal to 20. Then we include the `sum(..)` reducer in the transducer composition. The resulting `sumOnlyFavorites(..)` function is a reducer that checks if a value passes both filters, and if so, adds the value to an accumulator value.
+> 首先，我们创建了一个名为 `sumOnlyFavorites(..)` 的函数，该函数是三个其他函数的组合。我们将两个过滤函数组合起来，其中一个检测值是否大于或等于 10，另一个检查是否小于或等于 20。然后在 transducer 组合中加入 `sum(..)` reducer。最终得到的 `sumOnlyFavorites(..)` 函数是一个 reducer，检测一个给定的值是否能够同时通过两个过滤函数的检测，如果是的话，将其值加到累加值上。
 >
-> Then we make another function called `printMagicNumber(..)` which first reduces a list of numbers using that `sumOnlyFavorites(..)` reducer we just defined, resulting in a sum of only numbers that passed the *favorite* checks. Then `printMagicNumber(..)` pipes that final sum into `constructMsg(..)`, which creates a string value that finally goes into `console.log(..)`.
+> 随后我们创建了另一个名为 `printMagicNumber(..)` 的函数，该函数首先使用之前定义的 reducer `sumOnlyFavorites(..)` 将一个包含数字的列表进行规约，得到通过 *favorite* 数字检查的数字之和。然后 `printMagicNumber(..)` 函数将之前规约的最终结果传递给 `constructMsg(..)` 函数，构造一个 string 值并最终传递给 `console.log(..)`。
 
 All those moving pieces *speak* to an FP developer in ways that likely seem highly unfamiliar to you right now. This book will help you *speak* that same kind of reasoning so that it's as readable to you as any other code, if not more so!
 
