@@ -78,23 +78,23 @@ function constructMsg(v) { return `The magic number is: ${v}`; }
 >
 > 随后我们创建了另一个名为 `printMagicNumber(..)` 的函数，该函数首先使用之前定义的 reducer `sumOnlyFavorites(..)` 将一个包含数字的列表进行规约，得到通过 *favorite* 数字检查的数字之和。然后 `printMagicNumber(..)` 函数将之前规约的最终结果传递给 `constructMsg(..)` 函数，构造一个 string 值并最终传递给 `console.log(..)`。
 
-All those moving pieces *speak* to an FP developer in ways that likely seem highly unfamiliar to you right now. This book will help you *speak* that same kind of reasoning so that it's as readable to you as any other code, if not more so!
+这些代码片段向函数式开发者*讲述*着它们的含义，这种方式对现在的你来说可能还很陌生。本书将帮助你*掌握*这种表达方式，从而使得这些代码对你来说像其他代码一样简单易读，或者可读性更高。
 
-A few other quick remarks about this code comparison:
+上述代码对比的一些其他要点：
 
-* It's likely that for many readers, the former snippet feels closer to comfortable/readable/maintainable than the latter snippet. It's entirely OK if that's the case. You're in exactly the right spot. I'm confident that if you stick it out through the whole book, and practice everything we talk about, that second snippet will eventually become a lot more natural, maybe even preferable!
+* 很可能对于很多读者而言，第一种写法感觉更加舒适、可读性和可维护性都更高。如果有这种想法的话，完全是正常的，不用担心。我相信，如果你坚持阅读本书，并且将其付诸实践，会发现第二种代码的写法将会变得更加自然甚至更好！
 
-* You might have done the task significantly or entirely different from either snippet presented. That's OK, too. This book won't be prescriptive in dictating that you should do something a specific way. The goal is to illustrate the pros/cons of various patterns and enable you to make those decisions. By the end of this book, how you would approach the task may fall a little closer to the second snippet than it does right now.
+* 对于上述代码需要完成的工作，你可能会采用与上述两种代码完全不同的做法，这完全是可以的。本书并不会规定你应该以某种特定的方式来做某事。真正的目的在于说明各种模式的优缺点，使得你能够据此来做出选择。在阅读完本书后，你处理上述问题的方式，有可能会比现在更加接近于第二种方案。
 
-* It's also possible that you're already a seasoned FP developer who's scanning through the start of this book to see if it has anything useful for you to read. That second snippet certainly has some bits that are quite familiar. But I'm also betting that you thought, "Hmmm, I wouldn't have done it *that* way..." a couple of times. That's OK, and entirely reasonable.
+* 有可能你已经是一个经验丰富的函数式开发者了，正在快速地浏览本书的开头部分并据此判断本书是否值得一读。第二种代码中有些地方对你来说已经非常熟悉。但我也打赌你会有多次出现“嗯……我不会用*那样*的处理方式……”的想法。那也没关系，而且这非常合理。
 
-    This is not a traditional, canonical FP book. We'll at times seem quite heretical in our approaches. We're seeking to strike a pragmatic balance between the clear undeniable benefits of FP, and the need to ship workable, maintainable JS without having to tackle a daunting mountain of math/notation/terminology. This is not *your* FP, it's "Functional-Light JavaScript".
+    这不是一本传统的，学院派的函数式编程书籍。有时我们的做法会看起来非常异端。我们都认同函数式不可否认的好处，但也努力在编写可工作、可维护性的 JS 代码与令人生畏的数学、符号和专有名词间寻找着一种务实的平衡。这不是*你的* FP，这是“FLP”。
 
-Whatever your reasons for reading this book, welcome!
+无论是出于什么原因阅读本书，欢迎你！
 
-## Confidence
+## 信心
 
-I have a very simple premise that sort of underlies everything I do as a teacher of software development (in JavaScript): code that you cannot trust is code that you do not understand. The reverse is true also: code that you don't understand is code you can't trust. Furthermore, if you cannot trust or understand your code, then you can't have any confidence whatsoever that the code you write is suitable to the task. You run the program and basically just cross your fingers.
+作为一个软件开发（JavaScript 领域）的教师，我有一个非常简单的假设，并以此作为一切的基础：你不信任的代码是你不理解的代码，反之亦然：你不理解的代码，你不信任它们。此外，如果你无法信任或理解自己的代码，也就没有信心确认所写的代码是否满足给定的任务。运行程序，然后双手合十，祈祷吧。
 
 What do I mean by trust? I mean that you can verify, by reading and reasoning, not just executing, that you understand what a piece of code *will* do; you aren't just relying on what it *should* do. More often than is perhaps prudent, we tend to rely on running test suites to verify our programs' correctness. I don't mean to suggest tests are bad. But I do think we should aspire to be able to understand our code well enough that we know the test suite will pass before it runs.
 
