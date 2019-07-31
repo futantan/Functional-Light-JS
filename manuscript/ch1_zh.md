@@ -96,13 +96,13 @@ function constructMsg(v) { return `The magic number is: ${v}`; }
 
 作为一个软件开发（JavaScript 领域）的教师，我有一个非常简单的假设，并以此作为一切的基础：你不信任的代码是你不理解的代码，反之亦然：你不理解的代码，你不信任它们。此外，如果你无法信任或理解自己的代码，也就没有信心确认所写的代码是否满足给定的任务。运行程序，然后双手合十，祈祷吧。
 
-What do I mean by trust? I mean that you can verify, by reading and reasoning, not just executing, that you understand what a piece of code *will* do; you aren't just relying on what it *should* do. More often than is perhaps prudent, we tend to rely on running test suites to verify our programs' correctness. I don't mean to suggest tests are bad. But I do think we should aspire to be able to understand our code well enough that we know the test suite will pass before it runs.
+代码信心意味着什么？我认为它代表着你可以在不运行代码的情况下，通过阅读代码和推理来进行验证，从而得知这段代码*将要*做什么；而不是依赖于这段代码*应该*做什么。通常情况下，我们倾向于依靠运行测试套件来确保程序的正确性。我并不是在说测试不好，我想强调的是我们应该能够很好地理解我们的代码，从而可以在测试运行前能够具有认为测试一定会通过的信心。
 
-The techniques that form the foundation of FP are designed from the mindset of having far more confidence over our programs just by reading them. Someone who understands FP, and who's disciplined enough to diligently use it throughout their programs, will write code that they **and others** can read and verify that the program will do what they want.
+仅通过阅读就能够获得对代码的极大信心，这也是函数式编程的设计理念。一个人如果懂得函数式编程，并且能够通过不断练习从而能够在程序中很好地应用函数式的话，那么他写出来的代码能够让他自己*和他人*都能通过阅读来验证程序行为是否如其所愿。
 
-Confidence is also increased when we use techniques that avoid or minimize likely sources of bugs. That's perhaps one of the biggest selling points of FP: FP programs often have fewer bugs, and the bugs that do exist are usually in more obvious places, so they're easier to find and fix. FP code tends to be more bug-resistant -- certainly not bug-proof, though.
+当我们使用能够避免或者最小化 bug 错误源的技术时，对代码的信息也会增加。这可能是函数式编程最大的卖点：函数式的代码通常 bug 更少，如果存在 bug 的话也更容易发现，所以更容易找到问题所在并进行修复。函数式的代码 bug 更少——当然也不是 bug 免疫的。
 
-As you journey through this book, you will begin to develop more confidence in the code you write, because you will use patterns and practices that are already well proven; and you'll avoid the most common causes of program bugs!
+伴随着本书的阅读之旅，你将对所写的代码越来越有信心，因为你会使用经过充分证明的模式和实践；并且你会避免大部分常见的程序 bug！
 
 ## Communication
 
