@@ -106,9 +106,10 @@ function constructMsg(v) { return `The magic number is: ${v}`; }
 
 ## Communication
 
-Why is Functional Programming important? To answer that, we need to take a bigger step back and talk about why programming itself is important.
+为什么函数式编程如此重要？要回答这个问题，我们需要先回过头来讨论一下为什么编程本身很重要。
 
 It may surprise you to hear this, but I don't believe that code is primarily a set of instructions for the computer. Actually, I think the fact that code instructs the computer is almost a happy accident.
+我下面的观点可能会让你感到惊讶，但是我认为代码不是针对计算机的一组指令。
 
 I believe very deeply that the vastly more important role of code is as a means of communication with other human beings.
 
