@@ -108,18 +108,17 @@ function constructMsg(v) { return `The magic number is: ${v}`; }
 
 为什么函数式编程如此重要？要回答这个问题，我们需要先回过头来讨论一下为什么编程本身很重要。
 
-It may surprise you to hear this, but I don't believe that code is primarily a set of instructions for the computer. Actually, I think the fact that code instructs the computer is almost a happy accident.
-我下面的观点可能会让你感到惊讶，但是我认为代码不是针对计算机的一组指令。
+我下面的观点可能会让你感到惊讶，但是我不认为代码主要是针对计算机的一组指令。我认为代码能够让计算机运行是一个美丽的意外。
 
-I believe very deeply that the vastly more important role of code is as a means of communication with other human beings.
+代码的一个非常重要的作用在于充当人与人之间沟通的媒介，这比能够让计算机运行更加重要，我对此深信不疑。
 
-You probably know by experience that an awful lot of your time spent "coding" is actually spent reading existing code. Very few of us are so privileged as to spend all or most of our time simply banging out all new code and never dealing with code that others (or our past selves) wrote.
+如果你有编程经验的话就会意识到，“编码”过程中花费大量时间的其实是阅读现有的代码。很少有人能够一直在编写新的代码，而不用处理别人（或者是过去的自己）编写的代码。
 
-It's widely estimated that developers spend 70% of code maintenance time on reading to understand it. That is eye-opening. 70%. No wonder the global average for a programmer's lines of code written per day is about 10. We spend up to 7 hours of our day just reading the code to figure out where those 10 lines should go!
+据普遍估计，开发人员将 70% 的代码维护时间花在了阅读并理解代码上。这个数字可能让人大开眼界。也难怪程序员每天编写的代码行数全球平均值为每天大约 10 行。我们每天花费了高达 7 个小时的时间来阅读代码，并以此决定这 10 行代码该如何编写！
 
-We need to focus a lot more on the readability of our code. And by the way, readability is not just about fewer characters. Readability is actually most impacted by familiarity.<a href="#user-content-footnote-1"><sup>1</sup></a>
+我们需要更多地关注代码的可读性。顺便说一句，可读性高并不是说代码越少越好。实际上，对代码可读性影响最大的是亲和度。<a href="#user-content-footnote-1"><sup>1</sup></a>
 
-If we are going to spend our time concerned with making code that will be more readable and understandable, FP is central in that effort. The principles of FP are well established, deeply studied and vetted, and provably verifiable. Taking the time to learn and employ these FP principles will ultimately lead to more readily and recognizably familiar code for you and others. The increase in code familiarity, and the expediency of that recognition, will improve code readability.
+如果我们将时间花在努力改善代码的可读性上面，那么函数式编程将会是这些努力的核心。函数式编程建立在被精心审查研究和充分证明的原理之上。花时间学习并掌握函数式编程的原理能够让你写出可读性更高，对自己和他人都更容易辨识，更具亲和度的代码。代码亲和度的提升和辨识度的提高会改善代码的可读性。
 
 For example, once you learn what `map(..)` does, you'll be able to almost instantly spot and understand it when you see it in any program. But every time you see a `for` loop, you're going to have to read the whole loop to understand it. The syntax of the `for` loop may be familiar, but the substance of what it's doing is not; that has to be *read*, every time.
 
