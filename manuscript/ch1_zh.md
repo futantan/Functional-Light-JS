@@ -126,48 +126,48 @@ function constructMsg(v) { return `The magic number is: ${v}`; }
 
 函数式编程（至少在没有大量专业术语的情况下）是写出具有可读性代码的有效工具。*这*是它为什么如此重要的原因。
 
-## Readability
+## 可读性
 
-Readability is not a binary characteristic. It's a largely subjective human factor describing our relationship to code. And it will naturally vary over time as our skills and understanding evolve. I have experienced effects similar to the following figure, and anecdotally many others I've talked to have as well.
+可读性不是二元特性，它主要是人们主观上对于代码的描述。所以它会随着我们技能和理解能力的提升而发生变化。我经历过类似于下图的变化，而且很多和我讨论过的其他人也有过这样的经历。
 
 <p align="center">
     <img src="images/fig17.png" width="50%">
 </p>
 
-You may just find yourself experiencing similar effects as you work through the book. But take heart; if you stick this out, the curve comes back up!
+你可能会发现自己在阅读本书时，经历着和上图类似的体验。但请记住，如果你坚持到最后，可读性曲线会恢复并有很大提升。
 
-*Imperative* describes the code most of us probably already write naturally; it's focused on precisely instructing the computer *how* to do something. Declarative code -- the kind we'll be learning to write, which adheres to FP principles -- is code that's more focused on describing the *what* outcome.
+*命令式*描述了我们大多数人非常自然的编写代码的方式；它专注于准确地告知计算机*如何*去做某事。声明式代码——我们将要学习如何去编写的代码方式，采取了函数式变成的原则——更专注于描述*做什么*而不是*如何做*。
 
-Let's revisit the two code snippets presented earlier in this chapter.
+让我们重新审视本章前面介绍的两个代码片段。
 
-The first snippet is imperative, focused almost entirely on *how* to do the tasks; it's littered with `if` statements, `for` loops, temporary variables, reassignments, value mutations, function calls with side effects, and implicit data flow between functions. You certainly *can* trace through its logic to see how the numbers flow and change to the end state, but it's not at all clear or straightforward.
+第一个代码片段是命令式的，关注点几乎都在*如何*完成任务；它充斥着 `if` 语句，`for` 循环，临时变量，重新赋值，改变现有值，带副作用的函数调用，还有函数之间的隐式数据流。你当然*可以*追溯它的逻辑从而搞清楚输入数字的流向以及如何转变为最终的状态，但是这样做一点都清晰直观。
 
-The second snippet is more declarative; it does away with most of those aforementioned imperative techniques. Notice there's no explicit conditionals, loops, side effects, reassignments, or mutations; instead, it employs well-known (to the FP world, anyway!) and trustable patterns like filtering, reduction, transducing, and composition. The focus shifts from low-level *how* to higher level *what* outcomes.
+第二个代码片段更加声明式；它没有使用前面命令式代码的方式。请注意，这里没有显式的 if 判断，循环，副作用，重新赋值或者值的修改；相反，它采用了众所周知（至少对函数式编程世界的人来说）和可信任的编程模式，例如 filter，reduce，transduce 和函数组合。关注点从低级别的*如何*做转移到了更高层级的*做什么*。
 
-Instead of messing with an `if` statement to test a number, we delegate that to a well-known FP utility like `gte(..)` (greater-than-or-equal-to), and then focus on the more important task of combining that filter with another filter and a summation function.
+我们没有用 `if` 来判断一个数字，而是使用了一个众所周知的函数式工具方法 `gte(..)`（大于或等于 greater-than-or-equal-to 的缩写），然后将注意力放在了更重要的工作上，即如何将该 filter 函数与另一个 filter 函数以及 sum 方法组合起来。
 
-Moreover, the flow of data through the second program is explicit:
+除此之外，第二段代码的数据流更加清晰：
 
-1. A list of numbers goes into `printMagicNumber(..)`.
-2. One at a time those numbers are processed by `sumOnlyFavorites(..)`, resulting in a single number total of only our favorite kinds of numbers.
-3. That total is converted to a message string with `constructMsg(..)`.
-4. The message string is printed to the console with `console.log(..)`.
+1. 一个数字的列表作为参数传递给 `printMagicNumber(..)`。
+2. `sumOnlyFavorites(..)` 每次处理列表中的一个数字，最终归约成一个所有判定为 favorite 的数字的和。
+3. 上一步的和通过 `constructMsg(..)` 函数转换为消息字符串。
+4. 消息字符串通过 `console.log(..)` 打印到终端。
 
-You may still feel this approach is convoluted, and that the imperative snippet was easier to understand. You're much more accustomed to it; familiarity has a profound influence on our judgments of readability. By the end of this book, though, you will have internalized the benefits of the second snippet's declarative approach, and that familiarity will spring its readability to life.
+你可能仍然觉得这种方式非常复杂，命令式的代码更容易理解，因为你已经非常熟悉这种类型的代码了；熟悉程度对我们对代码可读性的判断有着巨大的影响。但是，到本书结束的时候，你将能够明白第二个代码片段中的声明式方法所带来的好处，对声明式代码熟悉度的提升，可以让函数式代码对你来说可读性更高。
 
-I know asking you to believe that at this point is a leap of faith.
+我知道在这个时间节点让你相信我所说的话，像是一次信仰之跃。
 
-It takes a lot more effort, and sometimes more code, to improve its readability as I'm suggesting, and to minimize or eliminate many of the mistakes that lead to bugs. Quite honestly, when I started writing this book, I could never have written (or even fully understood!) that second snippet. As I'm now further along on my journey of learning, it's more natural and comfortable.
+为了像我建议的那样提高代码的可读性，最小化或消除能够导致 bug 的很多错误，这需要更多的努力，有时甚至需要更多的代码。老实说，在我开始写这本书的时候，我绝不可能写出（甚至是完全理解！）第二段代码。随着我的学习之旅，第二段代码让我觉得更加自然和舒适。
 
-If you're hoping that FP refactoring, like a magic silver bullet, will quickly transform your code to be more graceful, elegant, clever, resilient, and concise -- that it will come easy in the short term -- unfortunately that's just not a realistic expectation.
+如果你指望使用函数式编程像一颗神奇的银弹一样，能够重构你的代码，让其更优雅、聪明、易于修改并简明精炼，这在短期内看起来很容易，但不幸的是，这个愿望不切实际。
 
-FP is a very different way of thinking about how code should be structured, to make the flow of data much more obvious and to help your reader follow your thinking. It will take time. This effort is eminently worthwhile, but it can be an arduous journey.
+作为一种代码构建方式，函数式编程的思考方式非常不同，它使得数据流更加明确，让代码的阅读者能够跟随你的想法。这需要花费时间，虽然可能是一段艰苦的旅程，但是这项工作是值得的。
 
-It still often takes me multiple attempts at refactoring a snippet of imperative code into more declarative FP, before I end up with something that's clear enough for me to understand later. I've found converting to FP is a slow iterative process rather than a quick binary flip from one paradigm to another.
+将一段命令式代码重构成我认为足够清晰的声明式函数式代码时，我仍经常需要进行多次尝试才能够完成。我发现转换到函数式编程范式是一个缓慢的迭代过程，并不能一蹴而就。
 
-I also apply the "teach it later" test to every piece of code I write. After I've written a piece of code, I leave it alone for a few hours or days, then come back and try to read it with fresh eyes, and pretend as if I need to teach or explain it to someone else. Usually, it's jumbled and confusing the first few passes, so I tweak it and repeat!
+对于我写的每段代码，都采用了“寓学于教”的测试方式。在我写了一段代码之后，我会将其放置几个小时或几天，然后再回过头来，以全新的眼光审视这些代码，假装自己需要向别人教授或者解释这些代码。通常在前几次测试中，都会发现代码有些混乱和难以理解，于是进行调整然后重复这一过程。
 
-I'm not trying to dampen your spirits. I really want you to hack through these weeds. I am glad I did it. I can finally start to see the curve bending upward toward improved readability. The effort has been worth it. It will be for you, too.
+我不是想打击你的积极性。我真心的希望你能够披荆斩棘并最终获得成功。我很高兴因为我做到了。我终于看到了可读性的曲线在上升，努力是值得的，你也可以做到，加油！
 
 ## Perspective
 
