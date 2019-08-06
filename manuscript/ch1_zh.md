@@ -104,7 +104,7 @@ function constructMsg(v) { return `The magic number is: ${v}`; }
 
 伴随着本书的阅读之旅，你将对所写的代码越来越有信心，因为你会使用经过充分证明的模式和实践；并且你会避免大部分常见的程序 bug！
 
-## Communication
+## 代码是沟通的媒介
 
 为什么函数式编程如此重要？要回答这个问题，我们需要先回过头来讨论一下为什么编程本身很重要。
 
@@ -120,11 +120,11 @@ function constructMsg(v) { return `The magic number is: ${v}`; }
 
 如果我们将时间花在努力改善代码的可读性上面，那么函数式编程将会是这些努力的核心。函数式编程建立在被精心审查研究和充分证明的原理之上。花时间学习并掌握函数式编程的原理能够让你写出可读性更高，对自己和他人都更容易辨识，更具亲和度的代码。代码亲和度的提升和辨识度的提高会改善代码的可读性。
 
-For example, once you learn what `map(..)` does, you'll be able to almost instantly spot and understand it when you see it in any program. But every time you see a `for` loop, you're going to have to read the whole loop to understand it. The syntax of the `for` loop may be familiar, but the substance of what it's doing is not; that has to be *read*, every time.
+例如，一旦你了解了 `map(..)` 的作用，当你在任何程序中看到时，都能立即识别并理解它。但是每次你看到一个 `for` 循环，你将不得不阅读整个循环部分的代码从而理解它。你可能很熟悉 `for` 循环的语法，但是它每次所做的事情实质上都不一样，所以每次都必须*阅读*循环体的内容。
 
-By having more code that's recognizable at a glance, and thus spending less time figuring out what the code is doing, our focus is freed up to think about the higher levels of program logic; this is the important stuff that most needs our attention anyway.
+能够一目了然的代码越多，那么花费在弄清代码实际意图上的时间就会越少，于是我们能够将关注点更多的放在更高层级的程序逻辑上；而这些才是真正需要我们关注的重点。
 
-FP (at least, without all the terminology weighing it down) is one of the most effective tools for crafting readable code. *That* is why it's so important.
+函数式编程（至少在没有大量专业术语的情况下）是写出具有可读性代码的有效工具。*这*是它为什么如此重要的原因。
 
 ## Readability
 
