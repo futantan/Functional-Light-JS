@@ -169,7 +169,7 @@ function constructMsg(v) { return `The magic number is: ${v}`; }
 
 我不是想打击你的积极性。我真心的希望你能够披荆斩棘并最终获得成功。我很高兴因为我做到了。我终于看到了可读性的曲线在上升，努力是值得的，你也可以做到，加油！
 
-## Perspective
+## 视角
 
 大多数关于函数式编程的书都采用的是自上而下的方法，但是我们将采取完全不同的方式：自底向上。我们将揭示函数式编程老炮公认的基本原理，这些是函数式编程的基础。但是在大多数情况下，我们会避免使用那些令人生畏的术语或者数学符号，因为这些会很容易让初学者有挫败感。
 
@@ -181,7 +181,7 @@ function constructMsg(v) { return `The magic number is: ${v}`; }
 
 我知道很多的函数式编程人员认为形式化方法本身有助于学习。但是我认为在你熟悉这种形式化方法之前，存在着一个学习曲线断崖。如果你恰好已经拥有数学或者计算机的背景，形式化方法可能对你来说会比较容易。但是对如没有的人，无论我们如何努力，形式化方法都会是学习道路上的一个拦路虎。
 
-So this book introduces the concepts that I believe FP is built on, but comes at it by giving you a boost from below to climb up the cliff wall, rather than condescendingly shouting down at you from the top, prodding you to just figure out how to climb as you go.
+所以本书介绍了我认为的函数式编程的基础概念，在你从底攀登这个学习曲线的时候为你助力，而不是站在山顶，弯着腰督促你向上爬，然后还让你自己想办法。
 
 ## How to Find Balance
 
