@@ -1,7 +1,7 @@
 # JavaScipt 函数式编程之光
 # 第一章：为什么使用函数式编程
 
-> 函数式程序员：（名词）。将变量命名为 “x”，将函数命名为 “f”，将代码模式称为“zygohistomorphic prepromorphism”（译者注：反正你看不懂的名词）的人。
+> 函数式程序员：（名词）将变量命名为 “x”，将函数命名为 “f”，将代码模式称为“zygohistomorphic prepromorphism”（译者注：反正你看不懂的名词）的人。
 >
 > —— James Iry @jamesiry 5/13/15
 >
@@ -165,21 +165,21 @@ function constructMsg(v) { return `The magic number is: ${v}`; }
 
 将一段命令式代码重构成我认为足够清晰的声明式函数式代码时，我仍经常需要进行多次尝试才能够完成。我发现转换到函数式编程范式是一个缓慢的迭代过程，并不能一蹴而就。
 
-对于我写的每段代码，都采用了“寓学于教”的测试方式。在我写了一段代码之后，我会将其放置几个小时或几天，然后再回过头来，以全新的眼光审视这些代码，假装自己需要向别人教授或者解释这些代码。通常在前几次测试中，都会发现代码有些混乱和难以理解，于是进行调整然后重复这一过程。
+对于我写的每段代码，都采用了“以教为学”的测试方式。在我写了一段代码之后，我会将其放置几个小时或几天，然后再回过头来，以全新的眼光审视这些代码，假装自己需要向别人教授或者解释这些代码。通常在前几次测试中，都会发现代码有些混乱和难以理解，于是进行调整然后重复这一过程。
 
 我不是想打击你的积极性。我真心的希望你能够披荆斩棘并最终获得成功。我很高兴因为我做到了。我终于看到了可读性的曲线在上升，努力是值得的，你也可以做到，加油！
 
 ## Perspective
 
-Most other FP texts seem to take a top-down approach, but we're going to go the opposite direction: working from the ground up, we'll uncover the basic foundational principles that I believe formal FPers would admit are the scaffolding for everything they do. But for the most part we'll stay arm's length away from most of the intimidating terminology or mathematical notation that can so easily frustrate learners.
+大多数关于函数式编程的书都采用的是自上而下的方法，但是我们将采取完全不同的方式：自底向上。我们将揭示函数式编程老炮公认的基本原理，这些是函数式编程的基础。但是在大多数情况下，我们会避免使用那些令人生畏的术语或者数学符号，因为这些会很容易让初学者有挫败感。
 
-I believe it's less important what you call something and more important that you understand what it is and how it works. That's not to say there's no importance to shared terminology -- it undoubtedly eases communication among seasoned professionals. But for the learner, I've found it can be distracting.
+我认为你如何称呼一个东西不是很重要，更重要的是理解它是什么以及是如何工作的。这并说术语不重要——它无疑会减轻富有经验的专业人士之间的沟通成本。但是对于初学者而言，术语会分散你的注意力。
 
-So this book will try to focus more on the base concepts and less on the fancy fluff. That's not to say there won't be terminology; there definitely will be. But don't get too wrapped up in the sophisticated words. Wherever necessary, look beyond them to the ideas.
+因此本书将会更多关注于基础概念而不是花哨的术语。也不是说不会涉及到术语，肯定会有的，但是不用过于关注复杂的术语。在必要时，可以越过它们，直击其背后的思想。
 
-I call the less formal practice herein "Functional-Light Programming" because I think where the formalism of true FP suffers is that it can be quite overwhelming if you're not already accustomed to formal thought. I'm not just guessing; this is my own personal story. Even after teaching FP and writing this book, I can still say that the formalism of terms and notation in FP is very, very difficult for me to process. I've tried, and tried, and I can't seem to get through much of it.
+我将这种非学院派的实践方式称为“轻量级函数式编程”，因为当你对函数式编程思想还不是特别熟悉的话，函数式的形式化方法会让你感到无所适从。这不是纸上谈兵，而是我自己的亲身经历。甚至在教授函数式编程和编写了本书之后，在遇到函数式中大量术语和符号的形式化方法的时候，我仍然认为是非常非常困难的。我尝试了多次，但其中的很多概念还是觉得难以理解。
 
-I know many FPers who believe that the formalism itself helps learning. But I think there's clearly a cliff where that only becomes true once you reach a certain comfort with the formalism. If you happen to already have a math background or even some flavors of CS experience, this may come more naturally to you. But some of us don't, and no matter how hard we try, the formalism keeps getting in the way.
+我知道很多的函数式编程人员认为形式化方法本身有助于学习。但是我认为在你熟悉这种形式化方法之前，存在着一个学习曲线断崖。如果你恰好已经拥有数学或者计算机的背景，形式化方法可能对你来说会比较容易。但是对如没有的人，无论我们如何努力，形式化方法都会是学习道路上的一个拦路虎。
 
 So this book introduces the concepts that I believe FP is built on, but comes at it by giving you a boost from below to climb up the cliff wall, rather than condescendingly shouting down at you from the top, prodding you to just figure out how to climb as you go.
 
