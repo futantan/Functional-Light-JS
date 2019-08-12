@@ -183,11 +183,11 @@ function constructMsg(v) { return `The magic number is: ${v}`; }
 
 所以本书介绍了我认为的函数式编程的基础概念，在你从底攀登这个学习曲线的时候为你助力，而不是站在山顶，弯着腰督促你向上爬，然后还让你自己想办法。
 
-## How to Find Balance
+## 如何取得平衡
 
-If you've been around programming for very long, chances are you've heard the phrase "YAGNI" before: "You Ain't Gonna Need It". This principle primarily comes from extreme programming, and stresses the high risk and cost of building a feature before it's needed.
+如果你有很长时间的编程经验的话，很可能听过“YAGNI”原则：“你不会需要他（You Ain't Gonna Need It）”。这个原则最初来源于极限编程，强调在不需要某种特性之前，实现它所带来的极高的风险和成本代价。
 
-Sometimes we guess we'll need a feature in the future, build it now believing it'll be easier to do as we build other stuff, then realize we guessed wrong and the feature wasn't needed, or needed to be quite different. Other times we guess right, but build a feature too early, and suck up time from the features that are genuinely needed now; we incur an opportunity cost in diluting our energy.
+有时我们猜测将来需要某个功能，于是现在进行开发，因为我们认为现在和其他功能模块一起开发的话会更加容易，但最终意识到猜错了，这个功能是不需要的。或者相反的，猜对了，但是在将来才需要的功能上花了太多的时间，占用了现在真正需要功能的开发时间；分散的精力让机会成本大大增加。
 
 YAGNI challenges us to remember: even if it's counterintuitive in a situation, we often should postpone building something until it's presently needed. We tend to exaggerate our mental estimates of the future refactoring cost of adding it later when it is needed. Odds are, it won't be as hard to do later as we might assume.
 
