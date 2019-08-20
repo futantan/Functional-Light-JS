@@ -1,4 +1,5 @@
 # JavaScipt 函数式编程之光
+
 # 第一章：为什么使用函数式编程
 
 > 函数式程序员：（名词）将变量命名为 “x”，将函数命名为 “f”，将代码模式称为“zygohistomorphic prepromorphism”（译者注：反正你看不懂的名词）的人。
@@ -18,13 +19,13 @@
 让我们通过代码前后对比的方式来简要展示一下书中会涉及到的概念。代码如下：
 
 ```js
-var numbers = [4,10,0,27,42,17,15,-6,58];
+var numbers = [4, 10, 0, 27, 42, 17, 15, -6, 58];
 var faves = [];
 var magicNumber = 0;
 
 pickFavoriteNumbers();
 calculateMagicNumber();
-outputMsg();                // The magic number is: 42
+outputMsg(); // The magic number is: 42
 
 // ***************
 
@@ -37,56 +38,60 @@ function calculateMagicNumber() {
 function pickFavoriteNumbers() {
     for (let num of numbers) {
         if (num >= 10 && num <= 20) {
-            faves.push( num );
+            faves.push(num);
         }
     }
 }
 
 function outputMsg() {
     var msg = `The magic number is: ${magicNumber}`;
-    console.log( msg );
+    console.log(msg);
 }
 ```
 
 现在让我们用另一种完全不同的编程风格来完成同样的事情：
 
 ```js
-var sumOnlyFavorites = FP.compose( [
-    FP.filterReducer( FP.gte( 10 ) ),
-    FP.filterReducer( FP.lte( 20 ) )
-] )( sum );
+var sumOnlyFavorites = FP.compose([
+    FP.filterReducer(FP.gte(10)),
+    FP.filterReducer(FP.lte(20))
+])(sum);
 
-var printMagicNumber = FP.pipe( [
-    FP.reduce( sumOnlyFavorites, 0 ),
+var printMagicNumber = FP.pipe([
+    FP.reduce(sumOnlyFavorites, 0),
     constructMsg,
     console.log
-] );
+]);
 
-var numbers = [4,10,0,27,42,17,15,-6,58];
+var numbers = [4, 10, 0, 27, 42, 17, 15, -6, 58];
 
-printMagicNumber( numbers );        // The magic number is: 42
+printMagicNumber(numbers); // The magic number is: 42
 
 // ***************
 
-function sum(x,y) { return x + y; }
-function constructMsg(v) { return `The magic number is: ${v}`; }
+function sum(x, y) {
+    return x + y;
+}
+function constructMsg(v) {
+    return `The magic number is: ${v}`;
+}
 ```
 
 一旦你明白了函数式或者轻量级函数式编程，在*阅读*到第二段代码的时候，内心的活动可能如下：
 
 > 首先，我们创建了一个名为 `sumOnlyFavorites(..)` 的函数，该函数是三个其他函数的组合。我们将两个过滤函数组合起来，其中一个检测值是否大于或等于 10，另一个检查是否小于或等于 20。然后在 transducer 组合中加入 `sum(..)` reducer。最终得到的 `sumOnlyFavorites(..)` 函数是一个 reducer，检测一个给定的值是否能够同时通过两个过滤函数的检测，如果是的话，将其值加到累加值上。
 >
-> 随后我们创建了另一个名为 `printMagicNumber(..)` 的函数，该函数首先使用之前定义的 reducer `sumOnlyFavorites(..)` 将一个包含数字的列表进行规约，得到通过 *favorite* 数字检查的数字之和。然后 `printMagicNumber(..)` 函数将之前规约的最终结果传递给 `constructMsg(..)` 函数，构造一个 string 值并最终传递给 `console.log(..)`。
+> 随后我们创建了另一个名为 `printMagicNumber(..)` 的函数，该函数首先使用之前定义的 reducer `sumOnlyFavorites(..)` 将一个包含数字的列表进行规约，得到通过 _favorite_ 数字检查的数字之和。然后 `printMagicNumber(..)` 函数将之前规约的最终结果传递给 `constructMsg(..)` 函数，构造一个 string 值并最终传递给 `console.log(..)`。
 
 这些代码片段向函数式开发者*讲述*着它们的含义，这种方式对现在的你来说可能还很陌生。本书将帮助你*掌握*这种表达方式，从而使得这些代码对你来说像其他代码一样简单易读，或者可读性更高。
 
 上述代码对比的一些其他要点：
 
-* 很可能对于很多读者而言，第一种写法感觉更加舒适、可读性和可维护性都更高。如果有这种想法的话，完全是正常的，不用担心。我相信，如果你坚持阅读本书，并且将其付诸实践，会发现第二种代码的写法将会变得更加自然甚至更好！
+-   很可能对于很多读者而言，第一种写法感觉更加舒适、可读性和可维护性都更高。如果有这种想法的话，完全是正常的，不用担心。我相信，如果你坚持阅读本书，并且将其付诸实践，会发现第二种代码的写法将会变得更加自然甚至更好！
 
-* 对于上述代码需要完成的工作，你可能会采用与上述两种代码完全不同的做法，这完全是可以的。本书并不会规定你应该以某种特定的方式来做某事。真正的目的在于说明各种模式的优缺点，使得你能够据此来做出选择。在阅读完本书后，你处理上述问题的方式，有可能会比现在更加接近于第二种方案。
+-   对于上述代码需要完成的工作，你可能会采用与上述两种代码完全不同的做法，这完全是可以的。本书并不会规定你应该以某种特定的方式来做某事。真正的目的在于说明各种模式的优缺点，使得你能够据此来做出选择。在阅读完本书后，你处理上述问题的方式，有可能会比现在更加接近于第二种方案。
 
-* 有可能你已经是一个经验丰富的函数式开发者了，正在快速地浏览本书的开头部分并据此判断本书是否值得一读。第二种代码中有些地方对你来说已经非常熟悉。但我也打赌你会有多次出现“嗯……我不会用*那样*的处理方式……”的想法。那也没关系，而且这非常合理。
+-   有可能你已经是一个经验丰富的函数式开发者了，正在快速地浏览本书的开头部分并据此判断本书是否值得一读。第二种代码中有些地方对你来说已经非常熟悉。但我也打赌你会有多次出现“嗯……我不会用*那样*的处理方式……”的想法。那也没关系，而且这非常合理。
 
     这不是一本传统的，学院派的函数式编程书籍。有时我们的做法会看起来非常异端。我们都认同函数式不可否认的好处，但也努力在编写可工作、可维护性的 JS 代码与令人生畏的数学、符号和专有名词间寻找着一种务实的平衡。这不是*你的* FP，这是“FLP”。
 
@@ -215,23 +220,23 @@ YAGNI 原则要求我们铭记：即使有时它是反直觉的，我们也应�
 
 一些强烈推荐的函数式、JavaScript 编程书籍：
 
-* [Professor Frisby's Mostly Adequate Guide to Functional Programming](https://drboolean.gitbooks.io/mostly-adequate-guide/content/ch1.html) 作者 [Brian Lonsdorf](https://twitter.com/drboolean)
-* [JavaScript Allongé](https://leanpub.com/javascriptallongesix) 作者 [Reg Braithwaite](https://twitter.com/raganwald)
-* [Functional JavaScript](http://shop.oreilly.com/product/0636920028857.do) 作者 [Michael Fogus](https://twitter.com/fogus)
+-   [Professor Frisby's Mostly Adequate Guide to Functional Programming](https://drboolean.gitbooks.io/mostly-adequate-guide/content/ch1.html) 作者 [Brian Lonsdorf](https://twitter.com/drboolean)
+-   [JavaScript Allongé](https://leanpub.com/javascriptallongesix) 作者 [Reg Braithwaite](https://twitter.com/raganwald)
+-   [Functional JavaScript](http://shop.oreilly.com/product/0636920028857.do) 作者 [Michael Fogus](https://twitter.com/fogus)
 
 ### 博客/网站
 
 你应该查看的一些作者和内容：
 
-* [Fun Fun Function Videos](https://www.youtube.com/watch?v=BMUiFMZr7vk) 作者 [Mattias P Johansson](https://twitter.com/mpjme)
-* [Awesome FP JS](https://github.com/stoeffel/awesome-fp-js)
-* [Kris Jenkins](http://blog.jenkster.com/2015/12/what-is-functional-programming.html)
-* [Eric Elliott](https://medium.com/@_ericelliott)
-* [James A Forbes](https://james-forbes.com/)
-* [James Longster](https://github.com/jlongster)
-* [André Staltz](http://staltz.com/)
-* [Functional Programming Jargon](https://github.com/hemanth/functional-programming-jargon#functional-programming-jargon)
-* [Functional Programming Exercises](https://github.com/InceptionCode/Functional-Programming-Exercises)
+-   [Fun Fun Function Videos](https://www.youtube.com/watch?v=BMUiFMZr7vk) 作者 [Mattias P Johansson](https://twitter.com/mpjme)
+-   [Awesome FP JS](https://github.com/stoeffel/awesome-fp-js)
+-   [Kris Jenkins](http://blog.jenkster.com/2015/12/what-is-functional-programming.html)
+-   [Eric Elliott](https://medium.com/@_ericelliott)
+-   [James A Forbes](https://james-forbes.com/)
+-   [James Longster](https://github.com/jlongster)
+-   [André Staltz](http://staltz.com/)
+-   [Functional Programming Jargon](https://github.com/hemanth/functional-programming-jargon#functional-programming-jargon)
+-   [Functional Programming Exercises](https://github.com/InceptionCode/Functional-Programming-Exercises)
 
 ### 库
 
@@ -241,23 +246,23 @@ YAGNI 原则要求我们铭记：即使有时它是反直觉的，我们也应�
 
 以下是一些流行的 JavaScript 的函数式编程库，可以通过它们来开始你的函数式编程之旅：
 
-* [Ramda](http://ramdajs.com)
-* [lodash/fp](https://github.com/lodash/lodash/wiki/FP-Guide)
-* [functional.js](http://functionaljs.com/)
-* [Immutable.js](https://github.com/facebook/immutable-js)
+-   [Ramda](http://ramdajs.com)
+-   [lodash/fp](https://github.com/lodash/lodash/wiki/FP-Guide)
+-   [functional.js](http://functionaljs.com/)
+-   [Immutable.js](https://github.com/facebook/immutable-js)
 
 [附录 C 深入研究了这些](apC_zh.md/#stuff-to-investigate)以及其他的一些库。
 
 ## 总结
 
-You may have a variety of reasons for starting to read this book, and different expectations of what you'll get out of it. This chapter has explained why I want you to read the book and what I want you to get out of the journey. It also helps you articulate to others (like your fellow developers) why they should come on the journey with you!
+促使你阅读本书的原因可能多种多样，对本书的期望也各有不同。本章阐释了我为何期望你能够阅读本书以及在这段旅途中能够收获什么。同时也能够帮助你向其他人（比如程序员朋友们）解释为什么要和你一起，开始函数式编程之旅!
 
-Functional programming is about writing code that is based on proven principles so we can gain a level of confidence and trust over the code we write and read. We shouldn't be content to write code that we anxiously *hope* works, and then abruptly breathe a sigh of relief when the test suite passes. We should *know* what it will do before we run it, and we should be absolutely confident that we've communicated all these ideas in our code for the benefit of other readers (including our future selves).
+在函数式编程中，编写的代码建立在经过验证的原理之上，因此我们能够据此获得对我们所编写代码的信心和信任。我们不应该满足于编写代码，然后焦急地*祈祷*它能够工作，在测试套件通过测试时才能终于松口气，这不是我们想要的。我们应该*知道*在代码运行前它会做什么，我们应该绝对相信在代码中已经向其他阅读者（包括未来的自己）充分表达清楚了我们的所有想法。
 
-This is the heart of Functional-Light JavaScript. The goal is to learn to effectively communicate with our code but not have to suffocate under mountains of notation or terminology to get there.
+这是 JavaScript 函数式编程之光的核心。我们的目标是学习如何有效地与我们的代码进行同构，而不是在符号和术语的的压力下窒碍难行。
 
-The journey to learning functional programming starts with deeply understanding the nature of what a function is. That's what we tackle in the next chapter.
+学习函数式编程的过程始于对函数本质的深刻理解。这也是我们下一章需要解决的问题。
 
-----
+---
 
 <a name="footnote-1"><sup>1</sup></a>Buse, Raymond P. L., and Westley R. Weimer. “Learning a Metric for Code Readability.” IEEE Transactions on Software Engineering, IEEE Press, July 2010, dl.acm.org/citation.cfm?id=1850615.
