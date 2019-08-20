@@ -136,7 +136,7 @@ function constructMsg(v) { return `The magic number is: ${v}`; }
 
 你可能会发现自己在阅读本书时，经历着和上图类似的体验。但请记住，如果你坚持到最后，可读性曲线会恢复并有很大提升。
 
-*命令式*描述了我们大多数人非常自然的编写代码的方式；它专注于准确地告知计算机*如何*去做某事。声明式代码——我们将要学习如何去编写的代码方式，采取了函数式变成的原则——更专注于描述*做什么*而不是*如何做*。
+*命令式*描述了我们大多数人非常自然的编写代码的方式；它专注于准确地告知计算机*如何*去做某事。声明式代码——我们将要学习如何去编写的代码方式，采取了函数式编程的原则——更专注于描述*做什么*而不是*如何做*。
 
 让我们重新审视本章前面介绍的两个代码片段。
 
@@ -189,41 +189,41 @@ function constructMsg(v) { return `The magic number is: ${v}`; }
 
 有时我们猜测将来需要某个功能，于是现在进行开发，因为我们认为现在和其他功能模块一起开发的话会更加容易，但最终意识到猜错了，这个功能是不需要的。或者相反的，猜对了，但是在将来才需要的功能上花了太多的时间，占用了现在真正需要功能的开发时间；分散的精力让机会成本大大增加。
 
-YAGNI challenges us to remember: even if it's counterintuitive in a situation, we often should postpone building something until it's presently needed. We tend to exaggerate our mental estimates of the future refactoring cost of adding it later when it is needed. Odds are, it won't be as hard to do later as we might assume.
+YAGNI 原则要求我们铭记：即使有时它是反直觉的，我们也应该推迟开发某个功能，直到我们需要它为止。我们可以在以后需要的时候进行重构，但是我们的心理预期总是倾向于夸大这种重构的成本。其实推迟做的成本常常没有我们想象的那么高。
 
-As it applies to functional programming, I would offer this admonition: there will be plenty of interesting and compelling patterns discussed in this text, but just because you find some pattern exciting to apply, it may not necessarily be appropriate to do so in a given part of your code.
+应用到函数式编程领域，我的忠告是：本书将会讨论大量有趣且引人注目的编程模式，但这些模式对于你的一些代码可能并不适用，所以不要盲目使用它们。
 
-This is where I will differ from many formal FPers: just because you *can* apply FP to something doesn't mean you *should* apply FP to it. Moreover, there are many ways to slice a problem, and even though you may have learned a more sophisticated approach that is more "future-proof" to maintenance and extensibility, a simpler FP pattern might be more than sufficient in that spot.
+这也是我和其他传统的函数式编程使用者不同的地方：在某些地方，*可以*使用函数式并不意味着你*应该*使用它。除此之外，还有很多可以解决问题的方式，即使你可能已经学会了一种更加复杂而“面向未来”的编程方式，这种方式更具可维护性和可扩展性，但是可能更简单的函数式编程模式可能就足够解决问题了。
 
-Generally, I'd recommend seeking balance in what you code, and to be conservative in your application of FP concepts as you get the hang of things. Default to the YAGNI principle in deciding if a certain pattern or abstraction will help that part of the code be more readable or if it's just introducing clever sophistication that isn't (yet) warranted.
+一般来说，我建议你在编码过程中寻找一种平衡，在掌握函数式编程概念的同时，做一个保守派人士，在应用的时候严格克己。在决定是否采用某个特定编程模式或者抽象的时候，默认采用 YAGNI 原则，从而判断它是提高了代码的可读性还是引入了一种未经证实的看似聪明实则不然的复杂性。
 
-> Reminder, any extensibility point that’s never used isn’t just wasted effort, it’s likely to also get in your way as well
+> 友情提醒，从未使用的可扩展性不仅仅是浪费精力，有时也可能会妨碍你走的更远
 >
 > Jeremy D. Miller @jeremydmiller 2/20/15
 >
 > https://twitter.com/jeremydmiller/status/568797862441586688
 
-Remember, every single line of code you write has a reader cost associated with it. That reader may be another team member, or even your future self. Neither of those readers will be impressed with overly clever, unnecessary sophistication just to show off your FP prowess.
+请记住，你所编写的每一行代码，都会给阅读者带来相应的阅读成本。这个阅读者可能是其他团队的成员，也可能是未来的你自己。在阅读代码的时候，对于那些为了炫技函数式编程而自认聪明引入的复杂度，从来不会得到认可。
 
-The best code is the code that is most readable in the future because it strikes exactly the right balance between what it can/should be (idealism) and what it must be (pragmatism).
+最好的代码是在将来仍最具可读性的代码，因为它在可以/应该是什么（理想主义）和它必须是什么（实用主义）之前取得了恰到好处的平衡。
 
-## Resources
+## 资源
 
-I have drawn on a great many different resources to be able to compose this text. I believe you, too, may benefit from them, so I wanted to take a moment to point them out.
+在撰写本书的时候，参考了许多不同的资源。我相信你也能够从中受益，所以我想花点时间向你介绍它们。
 
-### Books
+### 书籍
 
-Some FP/JavaScript books that you should definitely read:
+一些强烈推荐的函数式、JavaScript 编程书籍：
 
-* [Professor Frisby's Mostly Adequate Guide to Functional Programming](https://drboolean.gitbooks.io/mostly-adequate-guide/content/ch1.html) by [Brian Lonsdorf](https://twitter.com/drboolean)
-* [JavaScript Allongé](https://leanpub.com/javascriptallongesix) by [Reg Braithwaite](https://twitter.com/raganwald)
-* [Functional JavaScript](http://shop.oreilly.com/product/0636920028857.do) by [Michael Fogus](https://twitter.com/fogus)
+* [Professor Frisby's Mostly Adequate Guide to Functional Programming](https://drboolean.gitbooks.io/mostly-adequate-guide/content/ch1.html) 作者 [Brian Lonsdorf](https://twitter.com/drboolean)
+* [JavaScript Allongé](https://leanpub.com/javascriptallongesix) 作者 [Reg Braithwaite](https://twitter.com/raganwald)
+* [Functional JavaScript](http://shop.oreilly.com/product/0636920028857.do) 作者 [Michael Fogus](https://twitter.com/fogus)
 
-### Blogs/sites
+### 博客/网站
 
-Some other authors and content you should check out:
+你应该查看的一些作者和内容：
 
-* [Fun Fun Function Videos](https://www.youtube.com/watch?v=BMUiFMZr7vk) by [Mattias P Johansson](https://twitter.com/mpjme)
+* [Fun Fun Function Videos](https://www.youtube.com/watch?v=BMUiFMZr7vk) 作者 [Mattias P Johansson](https://twitter.com/mpjme)
 * [Awesome FP JS](https://github.com/stoeffel/awesome-fp-js)
 * [Kris Jenkins](http://blog.jenkster.com/2015/12/what-is-functional-programming.html)
 * [Eric Elliott](https://medium.com/@_ericelliott)
@@ -233,22 +233,22 @@ Some other authors and content you should check out:
 * [Functional Programming Jargon](https://github.com/hemanth/functional-programming-jargon#functional-programming-jargon)
 * [Functional Programming Exercises](https://github.com/InceptionCode/Functional-Programming-Exercises)
 
-### Libraries
+### 库
 
-The code snippets in this book largely do not rely on libraries. Each operation that we discover, we'll derive how to implement it in standalone, plain ol' JavaScript. However, as you begin to build more of your real code with FP, you'll soon want a library to provide optimized and highly reliable versions of these commonly accepted utilities.
+本书中的代码片段基本不依赖于三方库。我们遇到的每一个操作，都会使用无依赖、原生的 JavaScript 进行推导。但是，当你使用函数式编程来构建越来越多的实际代码时，你会希望拥有一个库能够提供那些高度优化并且高度可靠的常用函数。
 
-By the way, you need to check the documentation for the library functions you use to ensure you know how they work. There will be a lot of similarities in many of them to the code we build on in this text, but there will undoubtedly be some differences, even between popular libraries.
+顺便说一句，你需要查看所使用的库的文档从而确保了解它们的工作方式。库提供的工具和本书构建的有很多相似之处，但毫无疑问会存在一些差异，即使是在很流行的库之间也是如此。
 
-Here are a few popular FP libraries for JavaScript that are a great place to start your exploration with:
+以下是一些流行的 JavaScript 的函数式编程库，可以通过它们来开始你的函数式编程之旅：
 
 * [Ramda](http://ramdajs.com)
 * [lodash/fp](https://github.com/lodash/lodash/wiki/FP-Guide)
 * [functional.js](http://functionaljs.com/)
 * [Immutable.js](https://github.com/facebook/immutable-js)
 
-[Appendix C takes a deeper look at these libraries](apC.md/#stuff-to-investigate) and others.
+[附录 C 深入研究了这些](apC.md/#stuff-to-investigate)以及其他的一些库。
 
-## Summary
+## 总结
 
 You may have a variety of reasons for starting to read this book, and different expectations of what you'll get out of it. This chapter has explained why I want you to read the book and what I want you to get out of the journey. It also helps you articulate to others (like your fellow developers) why they should come on the journey with you!
 
