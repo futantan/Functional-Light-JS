@@ -246,7 +246,7 @@ YAGNI 原则要求我们铭记：即使有时它是反直觉的，我们也应�
 * [functional.js](http://functionaljs.com/)
 * [Immutable.js](https://github.com/facebook/immutable-js)
 
-[附录 C 深入研究了这些](apC.md/#stuff-to-investigate)以及其他的一些库。
+[附录 C 深入研究了这些](apC_zh.md/#stuff-to-investigate)以及其他的一些库。
 
 ## 总结
 
