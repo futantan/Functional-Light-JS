@@ -29,25 +29,23 @@
 
 你可能注意到，对于任何的 `x` 值，比如 `2`，如果将其代入等式，会得到 `11`。`11` 代表什么？它是 `f(x)` 的返回值，也就是 `y` 的值。
 
-In other words, we can choose to interpret the input and output values as a point at `(2,11)` on that curve in the graph. And for every value of `x` we plug in, we get another `y` value that pairs with it as a coordinate for a point. Another is `(0,3)`, and another is `(-1,5)`. Put all those points together, and you have the graph of that parabolic curve as shown here.
+换句话说，我们可以将输入和输出值对应到图中曲线上的点 `(2,11)`。对于每一个输入 `x`，我们可以得到一个与之对应的 `y` 值，类似的还有 `(0,3)`，`(-1,5)` 等等。将所有的这些点连在一起，就可以得到上图中的抛物线曲线图。
 
-So what's any of this got to do with FP?
+那么这些与函数式编程有什么关系呢？
 
-In math, a function always takes input(s), and always gives an output. A term you'll often hear around FP is "morphism"; this is a fancy way of describing a set of values that maps to another set of values, like the inputs of a function related to the outputs of that function.
+在数学中，函数总是接受输入，同时有输出值。在函数式编程中你经常听到的一个术语是“态射（morphism）”；这个名词很花俏，它描述了一个集合中的值映射到另一个集合中，例如一个函数的输入到输入的映射。
 
-In algebraic math, those inputs and outputs are often interpreted as components of coordinates to be graphed. In our programs, however, we can define functions with all sorts of input(s) and output(s), even though they'll rarely be interpreted as a visually plotted curve on a graph.
+在代数数学中，这些输入和输出通常被解释为绘制图形的坐标分量。然而在我们的程序中，我们定义的函数可能有各种各样的输入和输出，也很少被解释为图形上的绘制的曲线。
 
-### Function vs Procedure
+### 函数和过程
 
-So why all the talk of math and graphs? Because essentially Functional Programming is about embracing using functions as *functions* in this mathematical sense.
+那为什么我们还要讨论数学和函数图象呢？因为函数式编程中函数的本质是数学意义上的*函数*。
 
-You may be more accustomed to thinking of functions as procedures. What's the difference? A procedure is an arbitrary collection of functionality. It may have inputs, it may not. It may have an output (`return` value), it may not.
+而函数有一个或多个输入，并且总是有一个`返回`值。
 
-A function takes input(s) and definitely always has a `return` value.
+如果你想使用函数式编程，**你应该尽可能地使用我们这里所说的函数**，并且尽可能地避免使用过程。所编写的所有 `function` 都应该有输入和输出。
 
-If you plan to do Functional Programming, **you should be using functions as much as possible**, and trying to avoid procedures wherever possible. All your `function`s should take input(s) and return output(s).
-
-Why? The answer to that will have many levels of meaning that we'll uncover throughout this book.
+为何？这个问题的答案是多方面的，我们会在本书中慢慢揭示。
 
 ## Function Input
 
