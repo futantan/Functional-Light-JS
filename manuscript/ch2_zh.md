@@ -1,33 +1,33 @@
-# Functional-Light JavaScript
-# Chapter 2: The Nature Of Functions
+# JavaScript 函数式编程之光
+# 第二章：函数的本质
 
-Functional Programming is **not just programming with the `function` keyword.** Oh, if only it was that easy -- I could end the book right here! Nevertheless, functions really *are* at the center of FP. And it's how we use functions that makes our code *functional*.
+函数式编程*并不意味着只是用 `function` 关键字编程*。如果真的这么容易的话，本书到这就可以结束啦！实际上，函数确实*是*函数式编程的核心。正确使用函数，是通往函数式的必经之路。
 
-But how sure are you that you know what *function* really means?
+但是你确定明白 *function* 的真正含义吗？
 
-In this chapter, we're going to lay the groundwork for the rest of the book by exploring all the foundational aspects of functions. Actually, this is a review of all the things even a non-FP programmer should know about functions. But certainly if we want to get the most out of FP concepts, it's essential we *know* functions inside and out.
+在本章，我们会探索函数的方方面面，从而为本书的其余部分奠定基础。实际上这是对必须了解的函数知识的回顾，每个人包括非函数式程序员都应该有所了解。如果你想要充分掌握和使用函数式编程概念的话，就必须对函数了如指掌。
 
-Brace yourself, because there's a lot more to the function than you may have realized.
+都搜一下精神，因为函数的知识点可能比你想象的要多的多。
 
-## What Is a Function?
+## 函数是什么？
 
-The question "What is a function?" superficially seems to have an obvious answer: a function is a collection of code that can be executed one or more times.
+“函数是什么”这个问题的答案似乎很明显：函数是一个可以被执行一次或多次的代码的集合。
 
-While this definition is reasonable, it's missing some very important essence that is the core of a *function* as it applies to FP. So let's dig below the surface to understand functions more completely.
+虽然这个定义是合理的，但是缺少了对函数式编程中*函数*本质的描述。因此，让我们更加深入地来探究函数的本质。
 
-### Brief Math Review
+### 简要的数学回顾
 
-I know I've promised we'd stay away from math as much as possible, but bear with me for a moment as we quickly observe some fundamental things about functions and graphs from algebra before we proceed.
+我知道之前承诺过要尽可能地不谈及数学，但是在继续之前请给我一点时间允许我快速过一下代数中关于函数和几何的一些基本内容。
 
-Do you remember learning anything about `f(x)` back in school? What about the equation `y = f(x)`?
+你还记得在学校里许过的关于 `f(x)` 的内容吗？还记得等式 `y = f(x)` 吗？
 
-Let's say an equation is defined like this: <code>f(x) = 2x<sup>2</sup> + 3</code>. What does that mean? What does it mean to graph that equation? Here's the graph:
+假设方程的定义如下：<code>f(x) = 2x<sup>2</sup> + 3</code>。这代表什么意思？等式的方程图像又代表什么？图像如下：
 
 <p align="center">
     <img src="images/fig1.png" width="40%">
 </p>
 
-What you can notice is that for any value of `x`, say `2`, if you plug it into the equation, you get `11`. What is `11`, though? It's the *return value* of the `f(x)` function, which earlier we said represents a `y` value.
+你可能注意到，对于任何的 `x` 值，比如 `2`，如果将其代入等式，会得到 `11`。`11` 代表什么？它是 `f(x)` 的返回值，也就是 `y` 的值。
 
 In other words, we can choose to interpret the input and output values as a point at `(2,11)` on that curve in the graph. And for every value of `x` we plug in, we get another `y` value that pairs with it as a coordinate for a point. Another is `(0,3)`, and another is `(-1,5)`. Put all those points together, and you have the graph of that parabolic curve as shown here.
 
