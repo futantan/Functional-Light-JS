@@ -88,7 +88,7 @@ foo( 0 );               // 0
 
 给函数参数加上默认值可以提高函数度易用性，也不失为一个好的实践。但是，默认参数也会导致阅读和理解成本的增加，需要搞清楚函数的最终参数究竟是什么。在使用这个功能的时候，需要细细思忖。
 
-### Counting Inputs
+### 入参计数
 
 函数所“期望”的参数个数，也就是你想要传递给该函数的实参数量，取决于函数声明时的参数数量：
 
@@ -180,7 +180,7 @@ OK，在这一点上已经唠叨的够多的了。
 假设你确实需要以类似数组的方式来获取某个位置的参数情况，这有可能是因为想要获取的参数没有对应的形参。我们该如何做到呢？
 
 ES6 to the rescue! Let's declare our function with the `...` operator -- variously referred to as "spread", "rest", or (my preference) "gather":
-ES6 前来救驾！让我们使用 `...` 操作符——有多种称呼，像“spred”，“rest”或者（我更喜欢的）“gather”。（译者注：中文一般称为展开）
+ES6 前来救驾！让我们使用 `...` 操作符——有多种称呼，像“spred”，“rest”或者（我更喜欢的）“gather”。（译者注：中文一般称为扩展）
 
 ```js
 function foo(x,y,z,...args) {
@@ -239,11 +239,11 @@ var arr = [ 2 ];
 foo( 1, ...arr, 3, ...[4,5] );      // 4
 ```
 
-Think of `...` in this symmetric sense: in a value-list position, it *spreads*. In an assignment position -- like a parameter list, because arguments get *assigned to* parameters -- it *gathers*.
+可以对称地考虑 `...` 操作符：在期望是值的时候，它将值*展开*。在赋值的时候——例如形参列表，实参会被*赋值*给形参，它会进行*收集*操作。
 
-Whichever behavior you invoke, `...` makes working with arrays of arguments much easier. Gone are the days of `slice(..)`, `concat(..)`, and `apply(..)` to wrangle our argument value arrays.
+无论是使用 `...` 的哪种行为，它都能够让处理参数数组更加容易。使用 `slice(..)`，`concat(..)` 和 `apply(..)` 来折腾参数数组的日志已经一去不复返了。
 
-**Tip:** Actually, these methods are not entirely useless. There will be a few places we rely on them throughout the code in this book. But certainly in most places, `...` will be much more declaratively readable, and preferable as a result.
+**提示：**实际上，这些方法并非毫无用处。在本书中，我们也有一些代码依赖于它们，但是在绝大部分地方 `...` 将会是我们的不二之选，它更加声明式，也更加易读。
 
 ### Parameter Destructuring
 
