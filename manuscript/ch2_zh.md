@@ -47,13 +47,13 @@
 
 为何？这个问题的答案是多方面的，我们会在本书中慢慢揭示。
 
-## Function Input
+## 函数输入
 
-So far, we can conclude that functions must expect input. But let's dig into how function inputs work.
+到目前位置，我们可以得出结论：函数必须具有输入。让我们来深入探究函数输入的工作原理。
 
-You sometimes hear people refer to these inputs as "arguments" and sometimes as "parameters". So what's that all about?
+有时人们会将函数的输入称为“实参（arguments）”有时也称为“形参（parameters）”。这些究竟是怎么回事？
 
-*Arguments* are the values you pass in, and *parameters* are the named variables inside the function that receive those passed-in values. Example:
+*实参*是传入函数的值，*形参*指代这些传入的参数的变量名称。例如：
 
 ```js
 function foo(x,y) {
@@ -65,15 +65,15 @@ var a = 3;
 foo( a, a * 2 );
 ```
 
-`a` and `a * 2` (actually, the result of `a * 2`, which is `6`) are the *arguments* to the `foo(..)` call. `x` and `y` are the *parameters* that receive the argument values (`3` and `6`, respectively).
+`a` 和 `a * 2` （实际上是 `a * 2` 的结果，也就是 `6`）是 `foo(..)` 的实参。`x` 和 `y` 是接收实参的形参，这里分别代表 `3` 和 `6`。
 
-**Note:** In JavaScript, there's no requirement that the number of *arguments* matches the number of *parameters*. If you pass more *arguments* than you have declared *parameters* to receive them, the values pass in just fine untouched. These values can be accessed in a few different ways, including the old-school `arguments` object you may have heard of before. If you pass fewer *arguments* than the declared *parameters*, each unmatched parameter is treated as an "undefined" variable, meaning it's present and available in the scope of the function, but just starts out with the empty `undefined` value.
+**注意：**在 JavaScript 中，*实参*和*形参*的数量并不要求严格匹配。如果你传递的*实参*个数超过所声明的*形参*的话，超过的参数也不会有什么影响。这些多余的参数有多种获取的方式，例如你可能听过的 `arguments` 对象。如果传入的*实参*个数少于所声明的*形参*个数，未匹配到的参数会被认为是 “undefined”，表示这些参数在函数作用域内有值，只不过值是 `undefined`。
 
-### Defaulting Parameters
+### 默认参数
 
-As of ES6, parameters can declare *default values*. In the case where the argument for that parameter is not passed, or it's passed the value `undefined`, the default assignment expression is substituted.
+从 ES6 开始，参数可以声明*默认值*。当拥有默认值的参数没有传入或者传入的值为 `undefined` 的时候，则使用默认的赋值表达式进行替换。
 
-Consider:
+考虑如下代码：
 
 ```js
 function foo(x = 3) {
@@ -86,7 +86,7 @@ foo( null );            // null
 foo( 0 );               // 0
 ```
 
-It's always a good practice to think about any default cases that can aid the usability of your functions. However, defaulting parameters can lead to more complexity in terms of reading and understanding the variations of how a function is called. Be judicious in how much you rely on this feature.
+给函数参数加上默认值可以提高函数度易用性，也不失为一个好的实践。但是，默认参数也会导致阅读和理解成本的增加，需要搞清楚函数的最终参数究竟是什么。在使用这个功能的时候，需要细细思忖。
 
 ### Counting Inputs
 
