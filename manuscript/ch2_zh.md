@@ -153,7 +153,7 @@ bar.length;             // 1
 baz.length;             // 1
 ```
 
-What about counting the number of arguments the current function call received? This was once trivial, but now the situation is slightly more complicated. Each function has an `arguments` object (array-like) available that holds a reference to each of the arguments passed in. You can then inspect the `length` property of `arguments` to figure out how many were actually passed:
+该如何计算当前的函数调用所接收到的参数个数呢？这个问题曾经很简单，但是现在的情况会稍微复杂一些。每个函数都拥有一个类数组的 `arguments` 对象，该对象持有每个实参的引用。你可以使用 `arguments` 的 `length` 属性来确定实际传入的参数个数：
 
 ```js
 function foo(x,y,z) {
@@ -163,23 +163,24 @@ function foo(x,y,z) {
 foo( 3, 4 );    // 2
 ```
 
-As of ES5 (and strict mode, specifically), `arguments` is considered by some to be sort of deprecated; many avoid using it if possible. In JS, we "never" break backward compatibility no matter how helpful that may be for future progress, so `arguments` will never be removed. But it's now commonly suggested that you avoid using it whenever possible.
+从 ES5 开始（特别是在严格模式下），有些人认为 `arguments` 被弃用了；许多人也尽可能避免使用它。在 JS 中，无论新功能对未来进展有多大的助益，我们都“永远不会”破坏向后兼容性，所以 `arguments` 永远都不会被移出。但是现在通常建议尽可能地避免使用它。
 
-However, I suggest that `arguments.length`, and only that, is OK to keep using for those cases where you need to care about the passed number of arguments. A future version of JS might possibly add a feature that offers the ability to determine the number of arguments passed without consulting `arguments.length`; if that happens, then we can fully drop usage of `arguments`!
+但是，我认为在这种情况下，也仅当在这种情况下是可以继续使用 `arguments.length` 来获取实参个数的。 JS 的未来版本可能会添加在不使用 `arguments.length` 情况下获取实参数量的功能；如果有这种新功能的话，我们就可以彻底抛弃 `arguments` 了！
 
-Be careful: **never** access arguments positionally, like `arguments[1]`. Stick to `arguments.length` only, and only if you must.
+要小心：**永远不要**通过位置索引访问，例如 `arguments[1]`。只使用 `arguments.length`，除非走投无路。
 
-Except, how will you access an argument that was passed in a position beyond the declared parameters? I'll answer that in a moment; but first, take a step back and ask yourself, "Why would I want to do that?" Seriously. Think about that closely for a minute.
+除此之外，如何才能访问所有声明参数之外位置传递的参数呢？马上我们会来揭晓答案；但在此之前，退一步认真问问自己，“我为什么需要这样做？”。花一分钟时间，仔细思考一下。
 
-It should be pretty rare that this occurs; it shouldn't be something you regularly expect or rely on when writing your functions. If you find yourself in such a scenario, spend an extra 20 minutes trying to design the interaction with that function in a different way. Name that extra argument even if it's exceptional.
+这种场景应该极少发生；在编写函数时，它不应该是你期望或者依赖的东西。如果你发现你在这样的场景中，请花额外的 20 分钟时间来尝试使用另一种方式来设计该函数。即使是个例外场景，也请将该额外参数变为命名参数。
 
-A function signature that accepts an indeterminate amount of arguments is referred to as a variadic function. Some people prefer this style of function design, but I think you'll find that often the FPer wants to avoid these where possible.
+接受不确定数量的参数的函数被称为可变参数（variadic）函数。有些人更喜欢这种函数的设计，但是你会发现函数式编程者会想要尽量避免这种设计。
 
-OK, enough harping on that point.
+OK，在这一点上已经唠叨的够多的了。
 
-Say you do need to access the arguments in a positional array-like way, possibly because you're accessing an argument that doesn't have a formal parameter at that position. How do we do it?
+假设你确实需要以类似数组的方式来获取某个位置的参数情况，这有可能是因为想要获取的参数没有对应的形参。我们该如何做到呢？
 
 ES6 to the rescue! Let's declare our function with the `...` operator -- variously referred to as "spread", "rest", or (my preference) "gather":
+ES6 前来救驾！让我们使用 `...` 操作符——有多种称呼，像“spred”，“rest”或者（我更喜欢的）“gather”。（译者注：中文一般称为展开）
 
 ```js
 function foo(x,y,z,...args) {
@@ -187,7 +188,7 @@ function foo(x,y,z,...args) {
 }
 ```
 
-See the `...args` in the parameter list? That's an ES6 declarative form that tells the engine to collect (ahem, "gather") all remaining arguments (if any) not assigned to named parameters, and put them in a real array named `args`. `args` will always be an array, even if it's empty. But it **will not** include values that are assigned to the `x`, `y`, and `z` parameters, only anything else that's passed in beyond those first three values:
+注意到参数列表中的 `...args` 没有？这是一个 ES6 的声明形式，告诉引擎将所有未赋值给形参的剩余的参数（如果有的话）收集到一个名为 `args` 的真数组中。`args` 将总会是一个数组，即使是空的。但是它**不会**包含 `x`, `y` 和 `z` 对应的参数，只有包含除了前三个之外的所有参数：
 
 ```js
 function foo(x,y,z,...args) {
