@@ -201,11 +201,11 @@ foo( 1, 2, 3, 4 );      // 1 2 3 [ 4 ]
 foo( 1, 2, 3, 4, 5 );   // 1 2 3 [ 4, 5 ]
 ```
 
-So, if you *really* want to design a function that can account for an arbitrary number of arguments to be passed in, use `...args` (or whatever name you like) on the end. Now, you'll have a real, non-deprecated, non-yucky array to access those argument values from.
+所以，如果你*确定*想要设计一个函数能够接受任意个数的参数的话，可以在最后加上 `...args` （或者其他你喜欢的名字）。现在，你拥有了一个真正的数组，能够从中获取参数，之前的方式是被废弃的，也不是那么的优雅。
 
-Just pay attention to the fact that the value `4` is at position `0` of that `args`, not position `3`. And its `length` value won't include those three `1`, `2`, and `3` values. `...args` gathers everything else, not including the `x`, `y`, and `z`.
+请注意 `4` 位于 `args` 中的第 `0` 个位置而不是第 `3` 个。`args` 的 `length` 值不会将之前的 `1`，`2` 和 `3` 3个值算在内。`...args` 将其余的所有值，除了 `x`，`y` 和 `z` 收集在一起。
 
-You *can* use the `...` operator in the parameter list even if there's no other formal parameters declared:
+你*可以*在参数列表中使用 `...` 操作符，即使没有声明其他形参：
 
 ```js
 function foo(...args) {
@@ -213,11 +213,11 @@ function foo(...args) {
 }
 ```
 
-Now `args` will be the full array of arguments, whatever they are, and you can use `args.length` to know exactly how many arguments have been passed in. And you're safe to use `args[1]` or `args[317]` if you so choose. Please don't pass in 318 arguments, though.
+现在 `args` 将会是完整的参数数组，无论参数是什么，你都可以使用 `args.length` 来获取传入参数的确切数量。如果你愿意的话，你可以安全地使用 `args[1]` 或者 `args[317]`。但是请不要传入像 318 个这么多的参数。
 
-### Arrays of Arguments
+### 实参数组
 
-What if you wanted to pass along an array of values as the arguments to a function call?
+如果你想要将一个数组内的值作为参数传递给一个函数，该怎么做？
 
 ```js
 function foo(...args) {
@@ -229,9 +229,9 @@ var arr = [ 1, 2, 3, 4, 5 ];
 foo( ...arr );                      // 4
 ```
 
-Our new friend `...` is used, but now not just in the parameter list; it's also used in the argument list at the call-site. It has the opposite behavior in this context. In a parameter list, we said it *gathered* arguments together. In an argument list, it *spreads* them out. So the contents of `arr` are actually spread out as individual arguments to the `foo(..)` call. Do you see how that's different from just passing in a reference to the whole `arr` array?
+我们的新朋友 `...` 可以大显神威了，但是现在不仅是用在形参列表中；它也可以在函数调用的时候在实参列表中使用。在这种情况下，它的功能恰好相反。在形参列表中，它将参数*聚集*在一起。在实参列表中，它将参数*展开*。因此 `arr` 数组的值被展开作为每个独立的参数传入 `foo(...)` 的调用中。你能看出这与直接传入 `arr` 数组引用的区别吗？
 
-By the way, multiple values and `...` spreadings can be interleaved, as you see fit:
+顺便提一下，值和 `...` 可以多次交替使用，例如：
 
 ```js
 var arr = [ 2 ];
