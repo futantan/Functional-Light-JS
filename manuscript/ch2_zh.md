@@ -90,7 +90,7 @@ foo( 0 );               // 0
 
 ### Counting Inputs
 
-The number of arguments a function "expects" -- how many arguments you'll likely want to pass to it -- is determined by the number of parameters that are declared:
+函数所“期望”的参数个数，也就是你想要传递给该函数的实参数量，取决于函数声明时的参数数量：
 
 ```js
 function foo(x,y,z) {
@@ -98,11 +98,11 @@ function foo(x,y,z) {
 }
 ```
 
-`foo(..)` *expects* three arguments, because it has three declared parameters. This count has a special term: arity. Arity is the number of parameters in a function declaration. The arity of `foo(..)` is `3`.
+`foo(..)` *期望*有三个参数，因为在它声明三个形参。参数个数有个专用的术语：arity。arity 表示函数声明中的形参个数。`foo(..)` 的 arity 是 `3`。
 
-Furthermore, a function with arity 1 is also called "unary", a function with arity 2 is also called "binary", and a function with arity 3 or higher is called "n-ary".
+除此之外，arity 为 1 的函数也被称为“一元”函数，arity 为 2 的函数被称为“二元”函数，arity 为 3 或者更高的被称为“n 元（n-ary）”函数。
 
-You may wish to inspect a function reference during the runtime of a program to determine its arity. This can be done with the `length` property of that function reference:
+你可能想要在运行时来检查程序中一个函数的 arity。可以通过使用该函数引用的 `length` 属性来做到：
 
 ```js
 function foo(x,y,z) {
@@ -112,13 +112,13 @@ function foo(x,y,z) {
 foo.length;             // 3
 ```
 
-One reason for determining the arity during execution would be if a piece of code received a function reference from multiple sources, and sent different values depending on the arity of each.
+作为一个在运行时获取 arity 的一个可能的场景，想象一下一段代码有可能持有不同情况的函数引用，需要根据函数 arity 的不同，传入不同的参数值。
 
-For example, imagine a case where an `fn` function reference could expect one, two, or three arguments, but you always want to just pass a variable `x` in the last position:
+例如，假设一个函数引用 `fn`，它可能期望一个，两个或者三个参数，但是我们总是希望将变量 `x` 作为最后一个参数传入。
 
 ```js
-// `fn` is set to some function reference
-// `x` exists with some value
+// `fn` 是某个函数的引用
+// `x` 中存放了某个值
 
 if (fn.length == 1) {
     fn( x );
@@ -131,9 +131,9 @@ else if (fn.length == 3) {
 }
 ```
 
-**Tip:** The `length` property of a function is read-only and it's determined at the time you declare the function. It should be thought of as essentially a piece of metadata that describes something about the intended usage of the function.
+**提示：** 函数的 `length` 属性是只读的，在函数声明的时候就已确定。它可以被认为是描述函数使用意图的一个元数据。
 
-One gotcha to be aware of is that certain kinds of parameter list variations can make the `length` property of the function report something different than you might expect:
+需要注意的是，某些类型的参数列表的使用方式会使函数 `length` 属性和你的预期不符：
 
 ```js
 function foo(x,y = 2) {
