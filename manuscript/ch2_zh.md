@@ -247,7 +247,7 @@ foo( 1, ...arr, 3, ...[4,5] );      // 4
 
 ### Parameter Destructuring
 
-Consider the variadic `foo(..)` from the previous section:
+考虑上一节中的可变参数 `foo(..)`：
 
 ```js
 function foo(...args) {
@@ -257,7 +257,7 @@ function foo(...args) {
 foo( ...[1,2,3] );
 ```
 
-What if we wanted to change that interaction so the caller of our function passes in an array of values instead of individual argument values? Just drop the two `...` usages:
+如果我们想改变函数的接口，使得函数调用者可以直接将数组传入而不用传入每一个参数值，该怎么办？把两处 `...` 的地方去掉即可：
 
 ```js
 function foo(args) {
@@ -268,6 +268,7 @@ foo( [1,2,3] );
 ```
 
 Simple enough. But what if now we wanted to give a parameter name to each of the first two values in the passed-in array? We aren't declaring individual parameters anymore, so it seems we lost that ability.
+代码很简单。如果现在我们想给传入数组的前两个参数分别绑定变量名该怎么办呢？我们无法给他们分别
 
 Thankfully, ES6 destructuring is the answer. Destructuring is a way to declare a *pattern* for the kind of structure (object, array, etc.) that you expect to see, and how decomposition (assignment) of its individual parts should be processed.
 
