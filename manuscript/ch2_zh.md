@@ -301,16 +301,15 @@ function foo(params) {
 }
 ```
 
-But here we highlight a principle we only briefly introduced in [Chapter 1](ch1.md/#readability): declarative code communicates more effectively than imperative code.
 但是这里我们需要强调在[第一章](ch1_zh.md/#可读性)中简要介绍的原则：声明式的代码比命令式代码的可读性更好。
 
-Declarative code (for example, the destructuring in the former `foo(..)` snippet, or the `...` operator usages) focuses on what the outcome of a piece of code should be.
+声明式代码（例如前面 `foo(..)` 代码片段中的解构，以及 `...` 操作符的使用）关注的是一段代码的结果应该是什么。
 
-Imperative code (such as the manual assignments in the latter snippet) focuses more on how to get the outcome. If you later read such imperative code, you have to mentally execute all of it to understand the desired outcome. The outcome is *coded* there, but it's not as clear because it's clouded by the details of *how* we get there.
+命令式代码（例如第二个代码片段中的手动赋值）则更侧重于如果获取结果。如果你以后再来阅读这段命令式的代码，你必须在心中讲全部代码都执行一遍从而理解输出结果会是什么。结果就藏在*编码*里面，但是由于被*如何做*的细节笼罩，所以并不是那么清晰易懂。
 
-The earlier `foo(..)` is regarded as more readable, because the destructuring hides the unnecessary details of *how* to manage the parameter inputs; the reader is free to focus only on *what* we will do with those parameters. That's clearly the most important concern, so it's what the reader should be focused on to understand the code most completely.
+第一个 `foo(..)` 的版本被认为可读性更高，因为解构隐藏了*如何*管理参数输入这些不必要的细节；读者可以更容易地只关注于使用这些参数*做什么*。让读者能够更专注于全面滴理解代码在做什么，才是最重要的。
 
-Wherever possible, and to whatever degrees our language and our libraries/frameworks will let us, **we should be striving for declarative, self-explanatory code.**
+无论我们所使用的编程语言，库或者框架是什么，以及其支持程度如何，**我们都应该竭尽所能编写声明式，能够自解释的代码。**
 
 ## Named Arguments
 
