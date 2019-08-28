@@ -267,12 +267,11 @@ function foo(args) {
 foo( [1,2,3] );
 ```
 
-Simple enough. But what if now we wanted to give a parameter name to each of the first two values in the passed-in array? We aren't declaring individual parameters anymore, so it seems we lost that ability.
-代码很简单。如果现在我们想给传入数组的前两个参数分别绑定变量名该怎么办呢？我们无法给他们分别
+代码很简单。但是如果现在我们想给所传入数组的前两个参数分别绑定变量名该怎么办呢？我们无法做到，似乎失去了这种能力。
 
-Thankfully, ES6 destructuring is the answer. Destructuring is a way to declare a *pattern* for the kind of structure (object, array, etc.) that you expect to see, and how decomposition (assignment) of its individual parts should be processed.
+值得庆幸的是，ES6 解构（Destructuring）能够帮助我们解决这个问题。解构允许按照一定的*模式*，按照你期望的样子从一些特定的数据结构（对象，数组等）中提取部分值，并赋值给变量。
 
-Consider:
+考虑如下代码：
 
 <a name="funcparamdestr"></a>
 
@@ -284,13 +283,13 @@ function foo( [x,y,...args] = [] ) {
 foo( [1,2,3] );
 ```
 
-Do you spot the `[ .. ]` brackets around the parameter list now? This is called array parameter destructuring.
+注意到形参列表中的 `[ .. ]` 了吗？这称为数组参数结构。
 
-In this example, destructuring tells the engine that an array is expected in this assignment position (aka parameter). The pattern says to take the first value of that array and assign to a local parameter variable called `x`, the second to `y`, and whatever is left is *gathered* into `args`.
+在这个例子中，解构告诉引擎在该参数位置，期望的是一个数组。这个模式的意思是说，将数组中的第一个值赋值给局部参数变量 `x`，将第二个值赋值给 `y`，剩下的所有值*收集*起来并赋值给 `args`
 
-### The Importance of Declarative Style
+### 声明式风格的重要性
 
-Considering the destructured `foo(..)` we just looked at, we could instead have processed the parameters manually:
+与之前我们在 `foo(..)` 中使用的解构相比，我们也可以使用手动处理参数：
 
 ```js
 function foo(params) {
@@ -303,6 +302,7 @@ function foo(params) {
 ```
 
 But here we highlight a principle we only briefly introduced in [Chapter 1](ch1.md/#readability): declarative code communicates more effectively than imperative code.
+但是这里我们需要强调在[第一章](ch1_zh.md/#可读性)中简要介绍的原则：声明式的代码比命令式代码的可读性更好。
 
 Declarative code (for example, the destructuring in the former `foo(..)` snippet, or the `...` operator usages) focuses on what the outcome of a piece of code should be.
 
