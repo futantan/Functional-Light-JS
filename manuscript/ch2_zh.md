@@ -313,7 +313,7 @@ function foo(params) {
 
 ## Named Arguments
 
-Just as we can destructure array parameters, we can destructure object parameters:
+就像我们可以解构数组参数一样，我们也可以对对象进行解构：
 
 ```js
 function foo( {x,y} = {} ) {
