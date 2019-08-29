@@ -311,7 +311,7 @@ function foo(params) {
 
 无论我们所使用的编程语言，库或者框架是什么，以及其支持程度如何，**我们都应该竭尽所能编写声明式，能够自解释的代码。**
 
-## Named Arguments
+## 具名参数
 
 就像我们可以解构数组参数一样，我们也可以对对象进行解构：
 
@@ -325,9 +325,10 @@ foo( {
 } );                    // undefined 3
 ```
 
-We pass in an object as the single argument, and it's destructured into two separate parameter variables `x` and `y`, which are assigned the values of those corresponding property names from the object passed in. It didn't matter that the `x` property wasn't on the object; it just ended up as a variable with `undefined` like you'd expect.
+我们将对象作为唯一的输入参数，它被解构为两个独立的参数变量 `x` 和 `y`，值为所传入对象中同名属性对应的值。输入对象中是否有 `x` 这个属性无关紧要，如果没有的话，解构后的 `x` 会和我们所期望的一样，是 `undefined`。
 
 But the part of parameter object destructuring I want you to pay attention to is the object being passed into `foo(..)`.
+但是我真正想让你注意的
 
 With a normal call-site like `foo(undefined,3)`, position is used to map from argument to parameter; we put the `3` in the second position to get it assigned to a `y` parameter. But at this new kind of call-site where parameter destructuring is involved, a simple object-property indicates which parameter (`y`) the argument value `3` should be assigned to.
 
