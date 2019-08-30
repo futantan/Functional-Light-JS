@@ -327,16 +327,15 @@ foo( {
 
 我们将对象作为唯一的输入参数，它被解构为两个独立的参数变量 `x` 和 `y`，值为所传入对象中同名属性对应的值。输入对象中是否有 `x` 这个属性无关紧要，如果没有的话，解构后的 `x` 会和我们所期望的一样，是 `undefined`。
 
-But the part of parameter object destructuring I want you to pay attention to is the object being passed into `foo(..)`.
-但是我真正想让你注意的
+但是我真正想让你注意的是传递给 `foo(..)` 进行解构的参数对象。
 
-With a normal call-site like `foo(undefined,3)`, position is used to map from argument to parameter; we put the `3` in the second position to get it assigned to a `y` parameter. But at this new kind of call-site where parameter destructuring is involved, a simple object-property indicates which parameter (`y`) the argument value `3` should be assigned to.
+通过普通的函数调用方式，像 `foo(undefined, 3)` 实参位置和形参匹配；我们将 `3` 放在了第二个参数位置上，从而将其赋值给 `y`。而在使用参数解构的函数调用中，属性名可以指明实参 `3` 的值会赋值给哪一个形参（`y`）。
 
-We didn't have to account for `x` in *that* call-site because in effect we didn't care about `x`. We just omitted it, instead of having to do something distracting like passing `undefined` as a positional placeholder.
+在函数调用中我们不必指明 `x` 的值，因为我们实际上并不关心 `x`。这里只是省略了它，而不用做必须传递一个 `undefined` 作为占位这样令人分心的事。
 
-Some languages have an explicit feature for this: named arguments. In other words, at the call-site, labeling an input value to indicate which parameter it maps to. JavaScript doesn't have named arguments, but parameter object destructuring is the next best thing.
+有些语言直接具有这种编程特性：具名参数。也就是说在调用的时候，标明了输入值会映射到哪个对应的参数之上。JavaScript 中没有具名参数的特性，但是形参对象解构是最佳的替代选项。
 
-Another FP-related benefit of using an object destructuring to pass in potentially multiple arguments is that a function that only takes one parameter (the object) is much easier to compose with another function's single output. Much more on that in [Chapter 4](ch4.md).
+另外一个使用对象解构传递多个可能参数的好处与函数式编程有关，那就是函数有且仅有一个形参（那个对象），能够更容易地与其他函数的单返回值进行函数组合。我们会在[第四章](ch4_zh.md)中讲解更多内容。
 
 ### Unordered Parameters
 
