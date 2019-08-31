@@ -400,11 +400,11 @@ console.log( x + y );           // 42
 
 **提示：**建议在使用多返回值函数的时候，多考虑一下是否可以通过重构来避免这种情况的发生，是否可以将其分解成两个或者更多单一职责的小函数。有时候可以避免，有时候不行；但是至少应该在使用之前，细细思忖。
 
-### Early Returns
+### 提前返回
 
-The `return` statement doesn't just return a value from a function. It's also a flow control structure; it ends the execution of the function at that point. A function with multiple `return` statements thus has multiple possible exit points, meaning that it may be harder to read a function to understand its output behavior if there are many paths that could produce that output.
+`return` 语句不仅能够从函数中返回值，它还是一种控制流结构；在返回的地方结束函数的执行。因此，具有多个 `return` 语句的函数具有多个可能的退出点，有很多的路径可以产生输出值，这也意味者在阅读该函数的时候，理解起来更加困难。
 
-Consider:
+考虑如下代码：
 
 ```js
 function foo(x) {
@@ -422,15 +422,15 @@ function foo(x) {
 }
 ```
 
-Pop quiz: without cheating and running this code in your browser, what does `foo(2)` return? What about `foo(4)`? And `foo(8)`? And `foo(12)`?
+突击测验：不使用浏览器运行此代码，`foo(2)` 的返回值是什么？`foo(4)` 的返回值呢？`foo(8)` 和 `foo(12)` 的返回值呢？
 
-How confident are you in your answers? How much mental tax did you pay to get those answers? I got it wrong the first two times I tried to think it through, and I wrote it!
+你对自己的答案有多大的信心？为了获得这些答案，你付出了多少心智上的负担？前两次尝试我都答错了，而且都是手算的！
 
-I think part of the readability problem here is that we're using `return` not just to return different values, but also as a flow control construct to quit a function's execution early in certain cases. There are obviously better ways to write that flow control (the `if` logic, etc.), but I also think there are ways to make the output paths more obvious.
+这里造成可读性障碍的原因是我们不仅使用 `return` 语句来返回不同的值，而且同时让其作为一种流程控制的手段，在某些情况下提前结束函数的执行。显然还有更好的手段来实现流程控制（例如 `if` 语句等），但是我认为为了使输出路径更明显，还有其他的方式。
 
-**Note:** The answers to the pop quiz are `2`, `2`, `8`, and `13`.
+**注意：**突击检测问题的答案分别是 `2`，`2`，`8` 和 `13`。
 
-Consider this version of the code:
+考虑如下版本的代码：
 
 ```js
 function foo(x) {
@@ -460,11 +460,11 @@ function foo(x) {
 }
 ```
 
-This version is unquestionably more verbose. But I would argue it's slightly simpler logic to follow, because every branch where `retValue` can get set is *guarded* by the condition that checks if it's already been set.
+这个版本的代码无疑更加冗长。但是我认为它的代码逻辑更加简单易懂，因为每一个设置了 `retValue` 的代码分支都检验并*确保* `retValue` 没有值。
 
-Rather than `return`ing from the function early, we used normal flow control (`if` logic) to determine the `retValue`'s assignment. At the end, we simply `return retValue`.
+我们使用正常的流程控制手段（`if` 逻辑）来决定 `retValue` 的赋值，而不是使用 `return` 提前结束函数。最后，只需要简单的使用 `return retValue`。
 
-I'm not unconditionally saying that you should always have a single `return`, or that you should never do early `return`s, but I do think you should be careful about the flow control part of `return` creating more implicitness in your function definitions. Try to figure out the most explicit way to express the logic; that will often be the best way.
+我并不是在无条件地宣称你只能有一个 `return` 语句，或者永远不能提前 `return`，但是我认为在函数定义中，当 `return` 语句的流程控制部分在产生更多的隐式信息的时候，你应该非常小心。试着找出表达逻辑的最明确的方式；这往往才是最好的表达方式。
 
 ### Un`return`ed Outputs
 
