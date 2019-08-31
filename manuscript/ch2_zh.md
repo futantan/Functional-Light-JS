@@ -337,9 +337,9 @@ foo( {
 
 另外一个使用对象解构传递多个可能参数的好处与函数式编程有关，那就是函数有且仅有一个形参（那个对象），能够更容易地与其他函数的单返回值进行函数组合。我们会在[第四章](ch4_zh.md)中讲解更多内容。
 
-### Unordered Parameters
+### 无序参数
 
-Another key benefit is that named arguments, by virtue of being specified as object properties, are not fundamentally ordered. That means we can specify inputs in whatever order we want:
+具名参数由于指定为对象的属性名，另一个由此带来的主要好处是无需特定的顺序。这意味着我们可以按照想要的任何顺序传入输入：
 
 ```js
 function foo( {x,y} = {} ) {
@@ -351,17 +351,17 @@ foo( {
 } );                    // undefined 3
 ```
 
-We're skipping the `x` parameter by simply omitting it. Or we could specify an `x` argument if we cared to, even if we listed it after `y` in the object literal. The call-site is no longer cluttered by ordered-placeholders like `undefined` to skip a parameter.
+要想跳过形参 `x` 我们可以直接省略它。如果关心 `x` 的内容的话，可以指定它的值，也可以将它列在对象字面量的 `y` 之后。调用者不会因为有 `undefined` 这样的占位值而跳过某些参数。
 
-Named arguments are much more flexible, and attractive from a readability perspective, especially when the function in question can take three, four, or more inputs.
+从可读性的角度来说，具名参数更加灵活，也更具吸引力，尤其是当所讨论的函数涉及三个，四个或者更多入参的时候。
 
-**Tip:** If this style of function arguments seems useful or interesting to you, check out coverage of my [FPO library in Appendix C](apC.md/#bonus-fpo).
+**提示：**如果你觉得这种风格的函数参数很有用，或者很感兴趣，可以查看[附录 C 中的 FPO 库](apC_zh.md/#bonus-fpo)。
 
-## Function Output
+## 函数输出
 
-Let's shift our attention from a function's inputs to its output.
+聊完了函数的输入，来看看函数输出。
 
-In JavaScript, functions always return a value. These three functions all have identical `return` behavior:
+在 JavaScript 中，函数总是具有一个返回值。下面的三个函数具有等价的 `return` 行为：
 
 ```js
 function foo() {}
@@ -375,11 +375,11 @@ function baz() {
 }
 ```
 
-The `undefined` value is implicitly `return`ed if you have no `return` or if you just have an empty `return;`.
+如果没有 `return` 或者只有空的 `return` 语句的话，`undefined` 会作为隐式的返回值。
 
-But keeping as much with the spirit of FP function definition as possible -- using functions and not procedures -- our functions should always have outputs, which means they should explicitly `return` a value, and usually not `undefined`.
+函数式编程中函数的定义要求尽可能地使用函数，而不是过程。为了尽可能地遵循这一原则，我们的函数应该总是具有返回值，也就意味着它们应该显式地`返回`一个值，并且通常来说不为 `undefined`。
 
-A `return` statement can only return a single value. So if your function needs to return multiple values, your only viable option is to collect them into a compound value like an array or an object:
+`return` 语句只能返回一个值。因此如果你的函数需要返回多个值，那么唯一可能的选择是将它们放在数组或者对象这样的复合值中。
 
 ```js
 function foo() {
@@ -389,16 +389,16 @@ function foo() {
 }
 ```
 
-Then, we'll assign `x` and `y` from two respective items in the array that comes back from `foo()`:
+然后，我们将 `foo()` 返回数组中的值分别赋给 `x` 和 `y`：
 
 ```js
 var [ x, y ] = foo();
 console.log( x + y );           // 42
 ```
 
-Collecting multiple values into an array (or object) to return, and subsequently destructuring those values back into distinct assignments, is a way to transparently express multiple outputs for a function.
+将多个值放在数组（或者对象）中然后返回，然后使用解构将值分别取出再赋值，是一种函数返回多个值的一种处理方式。
 
-**Tip:** I'd be remiss if I didn't suggest you take a moment to consider if a function needing multiple outputs could be refactored to avoid that, perhaps separated into two or more smaller single-purpose functions? Sometimes that will be possible, sometimes not; but you should at least consider it.
+**提示：**建议在使用多返回值函数的时候，多考虑一下是否可以通过重构来避免这种情况的发生，是否可以将其分解成两个或者更多单一职责的小函数。有时候可以避免，有时候不行；但是至少应该在使用之前，细细思忖。
 
 ### Early Returns
 
