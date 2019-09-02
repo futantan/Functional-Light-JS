@@ -464,13 +464,13 @@ function foo(x) {
 
 我们使用正常的流程控制手段（`if` 逻辑）来决定 `retValue` 的赋值，而不是使用 `return` 提前结束函数。最后，只需要简单的使用 `return retValue`。
 
-我并不是在无条件地宣称你只能有一个 `return` 语句，或者永远不能提前 `return`，但是我认为在函数定义中，当 `return` 语句的流程控制部分在产生更多的隐式信息的时候，你应该非常小心。试着找出表达逻辑的最明确的方式；这往往才是最好的表达方式。
+我并不是在无条件地宣称你只能有一个 `return` 语句，或者永远不能提前 `return`，但是我认为在函数定义中，当 `return` 语句的流程控制部分在产生更多的隐式信息的时候，你应该非常小心。试着找出表达逻辑最明确的方式；这往往才是最好的表达方式。
 
-### Un`return`ed Outputs
+### 非 `return` 的输出
 
-One technique that you've probably used in most code you've written, and maybe didn't even think about it much, is to have a function output some or all of its values by simply changing variables outside itself.
+在你写过的代码中，可能没有太过注意，但很有可能这么干过：通过简单地改变函数外部的变量来输出一个或全部的值。
 
-Remember our <code>f(x) = 2x<sup>2</sup> + 3</code> function from earlier in the chapter? We could have defined it like this in JS:
+还记得前面章节中的 <code>f(x) = 2x<sup>2</sup> + 3</code> 函数吗？在 JS 中我们可以这么定义它：
 
 ```js
 var y;
@@ -484,7 +484,7 @@ f( 2 );
 y;                      // 11
 ```
 
-I know this is a silly example; we could just as easily have `return`d the value instead of setting it into `y` from within the function:
+我知道这是一个愚蠢的例子；我们本可以很容易的 `return` 结果而不是在函数内部将结果赋值给 `y`：
 
 ```js
 function f(x) {
@@ -496,13 +496,13 @@ var y = f( 2 );
 y;                      // 11
 ```
 
-Both functions accomplish the same task, so is there any reason we should pick one version over the other? **Yes, absolutely.**
+两个版本的函数都能够完成相同的任务，那么有什么评价标准使得这两种方式有着云泥之别吗？**有，必须有。**
 
-One way to explain the difference is that the `return` in the latter version signals an explicit output, whereas the `y` assignment in the former is an implicit output. You may already have some intuition that guides you in such cases; typically, developers prefer explicit patterns over implicit ones.
+一种原因是第二个版本中的 `return` 表明这是一个显式的输出，而第一个版本中 `y` 的赋值是隐式输出。这种场景下，你应该已经有了好代码的直觉；通常，相比与隐式，开发人员会更喜欢显式模式。
 
-But changing a variable in an outer scope, as we did with the `y` assignment inside of `foo(..)`, is just one way of achieving an implicit output. A more subtle example is making changes to non-local values via reference.
+在 `foo(..)` 中给 `y` 赋值从而修改外部变量，这只是一种隐式输出的场景。一种更加隐秘的方式是通过引用来修改非本地变量的值。
 
-Consider:
+考虑如下代码：
 
 ```js
 function sum(list) {
@@ -521,19 +521,19 @@ var nums = [ 1, 3, 9, 27, , 84 ];
 sum( nums );            // 124
 ```
 
-The most obvious output from this function is the sum `124`, which we explicitly `return`ed. But do you spot the other output? Try that code and then inspect the `nums` array. Now do you spot the difference?
+这个函数最容易观察到的输出是总和 `124`，这里是显式 `return` 的。但是你注意到其他的输出了吗？尝试运行代码，然后检查 `nums` 数组。现在你发现差异了吗？
 
-Instead of an `undefined` empty slot value in position `4`, now there's a `0`. The harmless looking `list[i] = 0` operation ended up affecting the array value on the outside, even though we operated on a local `list` parameter variable.
+数组中处于 `4` 的位置，原来是 `undefined`，现在是一个 `0`。看似无害的 `list[i] = 0` 操作最终影响到了函数外部数组的值，即便我们是在操作一个本地的 `list` 参数变量。
 
-Why? Because `list` holds a reference-copy of the `nums` reference, not a value-copy of the `[1,3,9,..]` array value. JavaScript uses references and reference-copies for arrays, objects, and functions, so we may create an accidental output from our function all too easily.
+为什么？因为 `list` 持有的是 `nums` 引用的一个引用拷贝，而不是 `[1,3,9,..]` 数组的值拷贝。对于数组，对象和函数，JavaScript 使用的是引用和引用拷贝，所以我们很容易地会在函数中造成意外的输出。
 
-This implicit function output has a special name in the FP world: side effects. And a function that has *no side effects* also has a special name: pure function. We'll talk a lot more about these in [Chapter 5](ch5.md), but the punchline is that we'll want to prefer pure functions and avoid side effects wherever possible.
+这种隐式的函数输出在函数式编程领域有一个专有名词：副作用（side effect）。*没有副作用*的函数也有一个专有名词：纯函数（pure function）。我们将在[第五章](ch5_zh.md)更多地讨论这些内容，但是重点是我们更期望使用纯函数，尽可能地避免副作用。
 
-## Functions of Functions
+## 函数的函数
 
-Functions can receive and return values of any type. A function that receives or returns one or more other function values has the special name: higher-order function.
+函数可以接收并返回任意类型的值。能够接收或者返回一个或多个其他函数值的函数，具有一个特殊的名称：高阶函数（high-order function）。
 
-Consider:
+考虑如下代码：
 
 ```js
 function forEach(list,fn) {
@@ -548,9 +548,9 @@ forEach( [1,2,3,4,5], function each(val){
 // 1 2 3 4 5
 ```
 
-`forEach(..)` is a higher-order function because it receives a function as an argument.
+`forEach(..)` 是一个高阶函数，因为它可以接收一个函数作为参数。
 
-A higher-order function can also output another function, like:
+一个高阶函数也可以返回另一个函数，例如：
 
 ```js
 function foo() {
@@ -565,6 +565,7 @@ f( "Hello!" );          // HELLO!
 ```
 
 `return` is not the only way to "output" an inner function:
+`return`
 
 ```js
 function foo() {
