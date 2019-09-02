@@ -564,8 +564,7 @@ var f = foo();
 f( "Hello!" );          // HELLO!
 ```
 
-`return` is not the only way to "output" an inner function:
-`return`
+`return` 不是“输出”内部函数的唯一方法：
 
 ```js
 function foo() {
@@ -581,7 +580,7 @@ function bar(func) {
 foo();                  // HELLO!
 ```
 
-Functions that treat other functions as values are higher-order functions by definition. FPers write these all the time!
+根据定义，将其他函数视为值的函数被称为高阶函数。函数式程序员将会一直与它们打交道！
 
 ### Keeping Scope
 
