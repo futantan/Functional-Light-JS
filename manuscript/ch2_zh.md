@@ -702,9 +702,9 @@ Specifically, we create two simple unary functions `lower(..)` and `upperFirst(.
 
 We'll use closure heavily throughout the rest of the text. It may just be the most important foundational practice in all of FP, if not programming as a whole. Make sure you're really comfortable with it!
 
-## Syntax
+## 语法
 
-Before we move on from this primer on functions, let's take a moment to discuss their syntax.
+在函数入门开始之前，让我们花点时间讨论一下它的语法。
 
 More than many other parts of this text, the discussions in this section are mostly opinion and preference, whether you agree with the views presented here or take opposite ones. These ideas are highly subjective, though many people seem to feel rather absolutely about them.
 
@@ -712,7 +712,7 @@ Ultimately, you get to decide.
 
 ### What's in a Name?
 
-Syntactically speaking, function declarations require the inclusion of a name:
+从语法上说，函数声明需要包含一个名称：
 
 ```js
 function helloMyNameIs() {
@@ -720,27 +720,27 @@ function helloMyNameIs() {
 }
 ```
 
-But function expressions can come in both named and anonymous forms:
+但是函数表达式可以有具名形式和匿名形式：
 
 ```js
 foo( function namedFunctionExpr(){
     // ..
 } );
 
-bar( function(){    // <-- look, no name!
+bar( function(){    // <-- 看，这里没有函数名
     // ..
 } );
 ```
 
-What exactly do we mean by anonymous, by the way? Specifically, functions have a `name` property that holds the string value of the name the function was given syntactically, such as `"helloMyNameIs"` or `"namedFunctionExpr"`. This `name` property is most notably used by the console/developer tools of your JS environment to list the function when it participates in a stack trace (usually from an exception).
+匿名究竟是什么意思？具体来说，函数拥有一个 `name` 属性，它保存着函数在语法上声明时的名称，例如 `"helloMyNameIs"` 或 `"namedFunctionExpr"`。这个 `name` 属性常用于控制台或 JS 环境的开发工具中，在调用栈跟踪（通常由于异常）的时候列出函数的名称。
 
-Anonymous functions are generally displayed as `(anonymous function)`.
+匿名函数通常显式为 `(anonymous function)`。
 
-If you've ever had to debug a JS program from nothing but a stack trace of an exception, you probably have felt the pain of seeing `(anonymous function)` appear line after line. This listing doesn't give a developer any clue whatsoever as to the path the exception came from. It's not doing the developer any favors.
+如果你有过不得不使用仅有的堆栈信息来进行 JS 程序 debug 的经历，你可能感受过一行又一行 `(anonymous function)` 的痛苦。这些信息没有给开发者任何关于异常来源路径的线索，也没有给开发者带来任何的帮助。
 
-If you name your function expressions, the name is always used. So if you use a good name like `handleProfileClicks` instead of `foo`, you'll get much more helpful stack traces.
+如果你给函数表达式命名，那么这个名称将会被用到。因此，如果你给一个函数一个像 `handleProfileClicks` 这样的好命字，而不是使用 `foo`，你将能够在调用栈中获得更多有用的信息。
 
-As of ES6, anonymous function expressions are in certain cases aided by *name inferencing*. Consider:
+从 ES6 开始，匿名函数名称在某些可况下可以由*名称推断（name inferencing）*进行添加。考虑如下代码：
 
 ```js
 var x = function(){};
