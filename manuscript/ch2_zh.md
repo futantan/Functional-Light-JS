@@ -748,9 +748,9 @@ var x = function(){};
 x.name;         // x
 ```
 
-If the engine is able to guess what name you *probably* want the function to take, it will go ahead and do so.
+如果引擎具备猜测希望的*可能*函数名的能力话，它会将推测的函数名赋上去。
 
-But beware, not all syntactic forms benefit from name inferencing. Probably the most common place a function expression shows up is as an argument to a function call:
+但请注意，不是所有形式的语法都能够被推断出来。最常见的情形是，将函数表达式作为一个参数放在函数调用中：
 
 ```js
 function foo(fn) {
@@ -763,14 +763,14 @@ foo( x );               // x
 foo( function(){} );    //
 ```
 
-When the name can't be inferred from the immediate surrounding syntax, it remains an empty string. Such a function will be reported as `(anonymous function)` in a stack trace should one occur.
+如果无法从周遭的语法中推断出函数名，它将仍保持为空字符串。如果在堆栈跟踪中出现这样的函数，会被显示为 `(anonymous function)`。
 
-There are other benefits to a function being named besides the debugging question. First, the syntactic name (aka lexical name) is useful for internal self-reference. Self-reference is necessary for recursion (both sync and async) and also helpful with event handlers.
+除了调试问题之外，具名函数还有其他的好处。首先，语法名称（也称词法名称）在函数内自引用的时候很有用。递归（无论是同步还是异步）中需要自引用，在处理事件处理器中也非常有用。
 
-Consider these different scenarios:
+考虑以下不同场景：
 
 ```js
-// sync recursion:
+// 同步递归：
 function findPropIn(propName,obj) {
     if (obj == undefined || typeof obj != "object") return;
 
@@ -789,30 +789,30 @@ function findPropIn(propName,obj) {
 ```
 
 ```js
-// async recursion:
+// 异步递归：
 setTimeout( function waitForIt(){
-    // does `it` exist yet?
+    // `it` 是否存在？
     if (!o.it) {
-        // try again later
+        // 稍后再试
         setTimeout( waitForIt, 100 );
     }
 }, 100 );
 ```
 
 ```js
-// event handler unbinding
+// 事件处理器解绑
 document.getElementById( "onceBtn" )
     .addEventListener( "click", function handleClick(evt){
-        // unbind event
+        // 解绑事件unbind event
         evt.target.removeEventListener( "click", handleClick, false );
 
         // ..
     }, false );
 ```
 
-In all these cases, the named function's lexical name was a useful and reliable self-reference from inside itself.
+上述所有的情形中，在具名函数内部，其词法名称的自引用本身非常有用、可靠。
 
-Moreover, even in simple cases with one-liner functions, naming them tends to make code more self-explanatory and thus easier to read for those who haven't read it before:
+此外，即使是简单的单行函数，为函数命名能够让代码不言自明，因此对于那些之前没有阅读过代码的人来说更加易读。
 
 ```js
 people.map( function getPreferredName(person){
@@ -821,14 +821,14 @@ people.map( function getPreferredName(person){
 // ..
 ```
 
-The function name `getPreferredName(..)` tells the reader something about what the mapping operation is intending to do that is not entirely obvious from just its code. This name label helps the code be more readable.
+函数名 `getPreferredName(..)` 告诉读者 map 操作的意图，仅从代码上来看的话不是特别明显。这个函数名有助于提高代码的可读性。
 
-Another place where anonymous function expressions are common is with immediately invoked function expressions (IIFEs):
+立即执行函数表达式（IIFE）是另外一个匿名函数常见的使用场景：
 
 ```js
 (function(){
 
-    // look, I'm an IIFE!
+    // 看，我是一个立即执行函数表达式！
 
 })();
 ```
