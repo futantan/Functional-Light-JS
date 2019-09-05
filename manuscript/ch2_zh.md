@@ -584,13 +584,13 @@ foo();                  // HELLO!
 
 ### Keeping Scope
 
-One of the most powerful things in all of programming, and especially in FP, is how a function behaves when it's inside another function's scope. When the inner function makes reference to a variable from the outer function, this is called closure.
+函数在另一个函数作用域内的行为能力，是所有编程中最为强大的东西，特别是在函数式编程中。当内部函数引用外部函数中的变量时，这称为闭包（closure）。
 
-Defined pragmatically:
+正式定义：
 
-> Closure is when a function remembers and accesses variables from outside of its own scope, even when that function is executed in a different scope.
+> 函数能够记住并引用自己作用域之外的变量，即使是在不同的作用域中执行该函数，拥有这种特性的函数被称为闭包。
 
-Consider:
+考虑如下代码：
 
 ```js
 function foo(msg) {
@@ -606,11 +606,11 @@ var helloFn = foo( "Hello!" );
 helloFn();              // HELLO!
 ```
 
-The `msg` parameter variable in the scope of `foo(..)` is referenced inside the inner function. When `foo(..)` is executed and the inner function is created, it captures the access to the `msg` variable, and retains that access even after being `return`ed.
+`foo(..)` 作用域内的 `msg` 参数变量被 inner 函数内部引用。当执行 `foo(..)` 函数的时候，inner 函数被创建，它捕获了对 `msg` 变量的访问，并且在函数被返回之后仍保持者对 `msg` 的访问权。
 
-Once we have `helloFn`, a reference to the inner function, `foo(..)` has finished and it would seem as if its scope should have gone away, meaning the `msg` variable would no longer exist. But that doesn't happen, because the inner function has a closure over `msg` that keeps it alive. The closed over `msg` variable survives for as long as the inner function (now referenced by `helloFn` in a different scope) stays around.
+一旦我们有了对 inner 函数的引用 `helloFn`，`foo(..)` 执行完毕，貌似它的作用域已经消失，这意味着 `msg` 变量将不复存在。但是事情并非如此，因为 inner 函数拥有一个对 `msg` 的闭包，让其保持活跃。只要 inner 函数（现在在另外的作用域内被 `helloFn` 引用）存在，被闭包捕获的 `msg` 变量就会一直存在。
 
-Let's look at a few more examples of closure in action:
+让我们看一下闭包的几个实际例子：
 
 ```js
 function person(name) {
@@ -626,9 +626,9 @@ fred();                 // I am Fred
 susan();                // I am Susan
 ```
 
-The inner function `identify()` has closure over the parameter `name`.
+内部函数 `identify()` 的闭包拥有对参数 `name` 的引用。
 
-The access that closure enables is not restricted to merely reading the variable's original value -- it's not just a snapshot but rather a live link. You can update the value, and that new current state remains remembered until the next access:
+闭包提供的对变量的访问，不仅仅是原始值的快照，而是真实的变量访问。你可以更新该值，更新后的值会一直保持，以供下次访问。
 
 ```js
 function runningCounter(start) {
@@ -647,9 +647,9 @@ score();                // 2
 score( 13 );            // 15
 ```
 
-**Warning:** For reasons that we'll explore in more depth later in the book, this example of using closure to remember a state that changes (`val`) is probably something you'll want to avoid where possible.
+**警告：**在本书的后续内容中，会进行更深入的讨论，基于此，这个例子中使用闭包来记住状态变化（`val`），这种做法有时可能是你想要尽可能避免的。
 
-If you have an operation that needs two inputs, one of which you know now but the other will be specified later, you can use closure to remember the first input:
+如果你有一个操作需要两个输入参数，其中一个现在已经知道，但是另一个将会在稍后指定，你可以使用闭包来记住第一个输入参数：
 
 ```js
 function makeAdder(x) {
@@ -658,22 +658,22 @@ function makeAdder(x) {
     };
 }
 
-// we already know `10` and `37` as first inputs, respectively
+// 我们已经知道，`10` 和 `37` 将会分别作为第一个参数
 var addTo10 = makeAdder( 10 );
 var addTo37 = makeAdder( 37 );
 
-// later, we specify the second inputs
+// 之后，我们指定了第二个参数
 addTo10( 3 );           // 13
 addTo10( 90 );          // 100
 
 addTo37( 13 );          // 50
 ```
 
-Normally, a `sum(..)` function would take both an `x` and `y` input to add them together. But in this example we receive and remember (via closure) the `x` value(s) first, while the `y` value(s) are separately specified later.
+通常，`sum(..)` 函数将同时接收 `x` 和 `y` 作为输出参数，然胡将他们加在一起。但是在这个例子中，我们首先接收并记住（通过闭包）`x` 的值，而 `y` 的值会在稍后指定。
 
-**Note:** This technique of specifying inputs in successive function calls is very common in FP, and comes in two forms: partial application and currying. We'll dive into them more thoroughly in [Chapter 3](ch3.md/#some-now-some-later).
+**注意：**这种在连续的函数调用中指定输入的技术在函数式编程中非常常见，有两种形式：部分应用（partial application）和柯里化（currying）。我们将在[第三章中](ch3_zh.md/#some-now-some-later)更深入地讨论它们。
 
-Of course, since functions are just values in JS, we can remember function values via closure:
+在 JS 中由于函数也是值，我们当然也可以使用闭包记住函数值：
 
 ```js
 function formatter(formatFn) {
@@ -694,13 +694,13 @@ lower( "WOW" );             // wow
 upperFirst( "hello" );      // Hello
 ```
 
-Instead of distributing/repeating the `toUpperCase()` and `toLowerCase()` logic all over our code, FP encourages us to create simple functions that encapsulate -- a fancy way of saying wrapping up -- that behavior.
+与其将 `toUpperCase()` 和 `toLowerCase()` 的重复逻辑写得到处都是，函数式编程更鼓励我们创建简单的函数，这些函数能够将行为包裹起来——换个更专业的说法，封装。
 
-Specifically, we create two simple unary functions `lower(..)` and `upperFirst(..)`, because those functions will be much easier to wire up to work with other functions in the rest of our program.
+具体来说，我们创建了两个简单的一元函数 `lower(..)` 和 `upperFirst(..)`，y原因是这些函数能够更容易地和程序中的其他函数进行组合。
 
-**Tip:** Did you spot how `upperFirst(..)` could have used `lower(..)`?
+**提示：**你有没有发现 `upperFirst(..)` 函数中可以利用 `lower(..)` 函数？
 
-We'll use closure heavily throughout the rest of the text. It may just be the most important foundational practice in all of FP, if not programming as a whole. Make sure you're really comfortable with it!
+在后面的内容中，我们会大量使用闭包。不能说是编程世界中，但可以说闭包是函数式编程领域里最重要的基础实践。确保你已经掌握了它！
 
 ## 语法
 
