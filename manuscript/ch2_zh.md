@@ -833,19 +833,19 @@ people.map( function getPreferredName(person){
 })();
 ```
 
-You virtually never see IIFEs using names for their function expressions, but they should. Why? For all the same reasons we just went over: stack trace debugging, reliable self-reference, and readability. If you can't come up with any other name for your IIFE, at least use the word IIFE:
+你几乎从未见过立即执行函数表达式在函数表达式中使用名称，但是应该有，为什么呢？和刚才说的原因相同：堆栈跟踪与调试，可靠的自引用和更高的可读性。如果你不能为你的立即执行表达式想出一个其他的名字，就使用 IIFE 吧：
 
 ```js
 (function IIFE(){
 
-    // You already knew I was an IIFE!
+    // 看名字就知道我是个 IIFE！
 
 })();
 ```
 
-What I'm getting at is there are multiple reasons why **named functions are always more preferable to anonymous functions.** As a matter of fact, I'd go so far as to say that there's basically never a case where an anonymous function is more preferable. They just don't really have any advantage over their named counterparts.
+有多种原因可以解释**为什么相比于匿名函数我们更倾向于使用具名函数**。事实上，我甚至可以说基本上从来没有匿名函数更优的情况。相比于具名函数，它们没有任何优势。
 
-It's incredibly easy to write anonymous functions, because it's one less name we have to devote our mental attention to figuring out.
+编写匿名函数非常容易，因为我们不用为了想一个名字而绞尽脑汁。
 
 I'll be honest; I'm as guilty of this as anyone. I don't like to struggle with naming. The first few names I come up with for a function are usually bad. I have to revisit the naming over and over. I'd much rather just punt with a good ol' anonymous function expression.
 
