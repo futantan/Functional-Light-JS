@@ -861,9 +861,9 @@ people.map( function getPreferredName(person){
 
 ### Functions Without `function`
 
-So far we've been using the full canonical syntax for functions. But you've no doubt also heard all the buzz around the ES6 `=>` arrow function syntax.
+到目前为止，我们使用的都是函数的完整规范语法。毫无疑问，你可能也听到过有关于 ES6 的 `=>` 箭头函数语法。
 
-Compare:
+比较如下代码：
 
 ```js
 people.map( function getPreferredName(person){
@@ -875,15 +875,15 @@ people.map( function getPreferredName(person){
 people.map( person => person.nicknames[0] || person.firstName );
 ```
 
-Whoa.
+哇哦。
 
-The keyword `function` is gone, so is `return`, the parentheses (`( )`), the curly braces (`{ }`), and the innermost semicolon (`;`). In place of all that, we used a so-called fat arrow symbol (`=>`).
+`function` 关键词不见了，`return` 也是，还有括号（`( )`），花括号（`{ }`）以及最里面的分号（`;`）。代替了所有这些的，是我们使用的所谓的胖箭头符号（`=>`）。
 
-But there's another thing we omitted. Did you spot it? The `getPreferredName` function name.
+但是还有一件事我们忽略了。你发现了吗？函数名 `getPreferredName`。
 
-That's right; `=>` arrow functions are lexically anonymous; there's no way to syntactically provide it a name. Their names can be inferred like regular functions, but again, the most common case of function expression values passed as arguments won't get any assistance in that way. Bummer.
+没错，`=>` 箭头函数在词法上是匿名函数；我们没有办法在语法上为其提供一个名称。它们的名称虽然可以像普通函数那样被推导出来，但是，作为参数传递的函数表达式，在这种最常见的使用情况中，名称推导却帮不上什么忙。
 
-If `person.nicknames` isn't defined for some reason, an exception will be thrown, meaning this `(anonymous function)` will be at the top of the stack trace. Ugh.
+如果 `person.nicknames` 由于某种原因未定义，将会抛出一个异常，这意味着 `(anonymous function)` 将会出现在堆栈追踪的顶端。哎。
 
 Honestly, the anonymity of `=>` arrow functions is a `=>` dagger to the heart, for me. I cannot abide by the loss of naming. It's harder to read, harder to debug, and impossible to self-reference.
 
