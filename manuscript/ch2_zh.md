@@ -706,11 +706,11 @@ upperFirst( "hello" );      // Hello
 
 在函数入门开始之前，让我们花点时间讨论一下它的语法。
 
-More than many other parts of this text, the discussions in this section are mostly opinion and preference, whether you agree with the views presented here or take opposite ones. These ideas are highly subjective, though many people seem to feel rather absolutely about them.
+无论你是否同意本节的观点，与本书的其他部分相比，本节所讨论内容大多带有个人观点和偏好。这些都是非常主观的看法，虽然在很多人看来，这种主观性并不存在。
 
-Ultimately, you get to decide.
+最终，选择权还是在你手中。
 
-### What's in a Name?
+### 函数名的意义？
 
 从语法上说，函数声明需要包含一个名称：
 
@@ -847,17 +847,17 @@ people.map( function getPreferredName(person){
 
 编写匿名函数非常容易，因为我们不用为了想一个名字而绞尽脑汁。
 
-I'll be honest; I'm as guilty of this as anyone. I don't like to struggle with naming. The first few names I come up with for a function are usually bad. I have to revisit the naming over and over. I'd much rather just punt with a good ol' anonymous function expression.
+说实话，我不喜欢为命名而苦恼，在这件事情上我和其他人一样感到愧疚。我为一个函数想到的前几个名字总是很差劲。我不得不一次一次地进行推敲。很多时候我想干脆直接使用匿名函数表达式，来避免命名的烦恼。
 
-But we're trading ease-of-writing for pain-of-reading. This is not a good trade-off. Being lazy or uncreative enough to not want to figure out names for your functions is an all too common, but poor, excuse for using anonymous functions.
+但是换取写代码方便的同时，我们得到的是阅读时的痛苦。这不是一个划算的投资。因为懒惰，或者说缺乏创造力，所以不想为函数寻得一个合适的名字，这是使用匿名函数的一个普遍借口，也是一个很烂的借口。
 
-**Name every single function.** And if you sit there stumped, unable to come up with a good name for some function you've written, I'd strongly suggest you don't fully understand that function's purpose yet -- or it's just too broad or abstract. You need to go back and re-design the function until this is more clear. And by that point, a name will become more apparent.
+**为每个函数命名。**如果你卡住了，无法为所写的函数想到一个合适的名字，我基本能够确定你没有完全理解该函数的目的——或者说这个函数职责过于宽泛，或者过于抽象了。你需要反过来重新设计该函数，直接其职责清晰。到那时，一个好的函数名将会浮现在你的脑海中。
 
-In my practice, if I don't have a good name to use for a function, I name it `TODO` initially. I'm certain that I'll at least catch that later when I search for "TODO" comments before committing code.
+在我的实践经验中，如果我无法为一个函数取个好名字，我会先把它命名为 `TODO`。我知道在提交代码之前，总是可以通过搜索 “TODO” 来找到之前的这些地方。
 
-I can testify from my own experience that in the struggle to name something well, I usually have come to understand it better, later, and often even refactor its design for improved readability and maintainability.
+根据我自己的经验可以证明，在命名的时候多花些功夫，在日后的能够更好地理解代码。经常对设计进行重构，可以提高可读性和可维护性。
 
-This time investment is well worth it.
+这次的投资是值得的。
 
 ### Functions Without `function`
 
