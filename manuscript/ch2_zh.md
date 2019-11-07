@@ -915,11 +915,12 @@ people.map( person =>
 
 **注意：**尽管在实际的产品代码中我不喜欢使用 `=>`，但在进行快速代码验证时非常有用。此外，在本书的其余部分我们将在许多地方使用箭头函数——特别是当我们介绍典型的函数式工具时——这时代码的简洁性是首选，能够优化代码片段有限的排版空间。这种方式是否有助于在你的产品代码中增加可读性，你需要自己做出判断。
 
-## What's This?
+## This 是什么？
 
-If you're not familiar with the `this` binding rules in JavaScript, I recommend checking out my book *You Don't Know JS: this & Object Prototypes*. For the purposes of this section, I'll assume you know how `this` gets determined for a function call (one of the four rules). But even if you're still fuzzy on *this*, the good news is we're going to conclude that you shouldn't be using `this` if you're trying to do FP.
+如果你不熟悉 JavaScript 中 `this` 的绑定，我推荐你阅读我的另一本书*你不知道的 JS：this 和对象原型*。在本节中，我假设你了解在函数调用时 `this` 是如何被确定的（四个规则之一）。即使你对 *this* 仍一知半解，好消息是如果想使用函数式的编程方式，我们将会得到的结论是，应该避免使用 `this`。
 
 **Note:** We're tackling a topic that we'll ultimately conclude we shouldn't use. Why!? Because the topic of `this` has implications for other topics covered later in this book. For example, our notions of function purity are impacted by `this` being essentially an implicit input to a function (see [Chapter 5](ch5.md)). Additionally, our perspective on `this` affects whether we choose array methods (`arr.map(..)`) versus standalone utilities (`map(..,arr)`) (see [Chapter 9](ch9.md)). Understanding `this` is essential to understanding why `this` really should *not* be part of your FP!
+**注意：**
 
 JavaScript `function`s have a `this` keyword that's automatically bound per function call. The `this` keyword can be described in many different ways, but I prefer to say it provides an object context for the function to run against.
 
