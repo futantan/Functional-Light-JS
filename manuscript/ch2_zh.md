@@ -885,35 +885,35 @@ people.map( person => person.nicknames[0] || person.firstName );
 
 如果 `person.nicknames` 由于某种原因未定义，将会抛出一个异常，这意味着 `(anonymous function)` 将会出现在堆栈追踪的顶端。哎。
 
-Honestly, the anonymity of `=>` arrow functions is a `=>` dagger to the heart, for me. I cannot abide by the loss of naming. It's harder to read, harder to debug, and impossible to self-reference.
+老实说，`=>` 箭头函数的匿名性对我来说就像是 `=>` 插在心脏上的一把匕首。我不能忍受函数名的缺失，这会导致代码更难阅读，更难以 debug，并且无法进行函数的自引用。
 
-But if that wasn't bad enough, the other slap in the face is that there's a whole bunch of subtle syntactic variations that you must wade through if you have different scenarios for your function definition. I'm not going to cover all of them in detail here, but briefly:
+但是糟糕的还不止于此，在不同的函数定义场景中，必须经历语法的一堆细微变化，这无疑是又一记耳光。我不会在这里涵盖所有这些内容，只是简要说一下：
 
 ```js
 people.map( person => person.nicknames[0] || person.firstName );
 
-// multiple parameters? need ( )
+// 多参数的情况？ 需要添加 ( )
 people.map( (person,idx) => person.nicknames[0] || person.firstName );
 
-// parameter destructuring? need ( )
+// 参数结构？ 需要添加 ( )
 people.map( ({ person }) => person.nicknames[0] || person.firstName );
 
-// parameter default? need ( )
+// 默认参数？ 需要添加 ( )
 people.map( (person = {}) => person.nicknames[0] || person.firstName );
 
-// returning an object? need ( )
+// 返回一个对象？ 需要添加 ( )
 people.map( person =>
     ({ preferredName: person.nicknames[0] || person.firstName })
 );
 ```
 
-The case for excitement over `=>` in the FP world is primarily that it follows almost exactly from the mathematical notation for functions, especially in FP languages like Haskell. The shape of `=>` arrow function syntax communicates mathematically.
+在函数式的世界中，对 `=>` 感到兴奋的主要原因是它几乎完全遵循了数学符号中的函数，特别是在诸如 Haskell 这样的函数式语言中。形如 `=>` 的函数符号在数学上是相通的。
 
-Digging even further, I'd suggest that the argument in favor of `=>` is that by using much lighter-weight syntax, we reduce the visual boundaries between functions which lets us use simple function expressions much like we'd use lazy expressions -- another favorite of the FPer.
+更进一步，使用 `=>` 可以减少函数间的可视边界，这使得我们可以像使用惰性表达式一样，获得一种更轻量级的语法——这是函数式使用者的另一个最爱，也是我赞成使用 `=>` 的原因。
 
-I think most FPers are going to wave off the concerns I'm sharing. They love anonymous functions and they love saving on syntax. But like I said before: you decide.
+我觉得大多数的函数式的使用者对于我所表达的担忧都会不以为意。他们热爱匿名函数，也喜欢这种简洁的语法。但就像我之前说过的一样：决定权在你。
 
-**Note:** Though I do not prefer to use `=>` in practice in my production code, they are useful in quick code explorations. Moreover, we will use arrow functions in many places throughout the rest of this book -- especially when we present typical FP utilities -- where conciseness is preferred to optimize for the limited physical space in code snippets. Make your own determinations whether this approach will make your own production-ready code more or less readable.
+**注意：**尽管在实际的产品代码中我不喜欢使用 `=>`，但在进行快速代码验证时非常有用。此外，在本书的其余部分我们将在许多地方使用箭头函数——特别是当我们介绍典型的函数式工具时——这时代码的简洁性是首选，能够优化代码片段有限的排版空间。这种方式是否有助于在你的产品代码中增加可读性，你需要自己做出判断。
 
 ## What's This?
 
