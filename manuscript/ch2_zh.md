@@ -859,7 +859,7 @@ people.map( function getPreferredName(person){
 
 这次的投资是值得的。
 
-### Functions Without `function`
+### 没有 `function` 关键词的函数
 
 到目前为止，我们使用的都是函数的完整规范语法。毫无疑问，你可能也听到过有关于 ES6 的 `=>` 箭头函数语法。
 
@@ -917,16 +917,15 @@ people.map( person =>
 
 ## This 是什么？
 
-如果你不熟悉 JavaScript 中 `this` 的绑定，我推荐你阅读我的另一本书*你不知道的 JS：this 和对象原型*。在本节中，我假设你了解在函数调用时 `this` 是如何被确定的（四个规则之一）。即使你对 *this* 仍一知半解，好消息是如果想使用函数式的编程方式，我们将会得到的结论是，应该避免使用 `this`。
+如果你不熟悉 JavaScript 中 `this` 的绑定，我推荐你阅读我的另一本书*《你不知道的 JS：this 和对象原型》*。在本节中，我假设你了解在函数调用时 `this` 是如何被确定的（四个规则之一）。即使你对 *this* 仍一知半解，好消息是如果想使用函数式的编程方式，我们将会得到的结论是，应该避免使用 `this`。
 
-**Note:** We're tackling a topic that we'll ultimately conclude we shouldn't use. Why!? Because the topic of `this` has implications for other topics covered later in this book. For example, our notions of function purity are impacted by `this` being essentially an implicit input to a function (see [Chapter 5](ch5.md)). Additionally, our perspective on `this` affects whether we choose array methods (`arr.map(..)`) versus standalone utilities (`map(..,arr)`) (see [Chapter 9](ch9.md)). Understanding `this` is essential to understanding why `this` really should *not* be part of your FP!
-**注意：**
+**注意：**关于我们正在讨论的话题，最终的结论将是不应该使用。这是为什么！因为 `this` 对于本书将要涉及的其他话题有影响。例如，函数纯度（purity）的概念上受到 `this` 的影响，`this` 实际上是函数的一个隐式参数（见[第五章](ch5.md)）。除此之外，对于 `this` 的看法会影响我们是选择数组的方法（`arr.map(..)`）还是选择独立的工具函数（`map(..,arr)`）（见[第九章](ch9.md)）。只有搞明白了 `this` 才能够理解为什么 `this` 不应该成为 FP 中的一部分！
 
-JavaScript `function`s have a `this` keyword that's automatically bound per function call. The `this` keyword can be described in many different ways, but I prefer to say it provides an object context for the function to run against.
+JavaScript 中的 `function` 在每次调用的时候，都会有一个自动绑定的 `this` 关键字。对于 `this` 可以有很多种描述方式，但是我更倾向于与说它为函数的运行提供了一个对象上下文。
 
-`this` is an implicit parameter input for your function.
+`this` 是函数的一个隐式参数。
 
-Consider:
+考虑如下代码：
 
 ```js
 function sum() {
@@ -947,7 +946,7 @@ var s = sum.bind( context );
 s();                        // 3
 ```
 
-Of course, if `this` can be input into a function implicitly, the same object context could be sent in as an explicit argument:
+`this` 可以作为隐式参数传递给函数，当然我们也可以使用显式的方式将同样的对象上下文传入：
 
 ```js
 function sum(ctx) {
@@ -962,9 +961,9 @@ var context = {
 sum( context );
 ```
 
-Simpler. And this kind of code will be a lot easier to deal with in FP. It's much easier to wire multiple functions together, or use any of the other input wrangling techniques we will get into in the next chapter, when inputs are always explicit. Doing them with implicit inputs like `this` ranges from awkward to nearly impossible depending on the scenario.
+这样所更简单。同时这种代码在函数式编程中更加容易处理。这样会让多个函数的组合更加容易，当使用显式参数时，也更容易使用下一章中将会介绍的一些参数处理技术。如果是使用隐式的 `this` 参数，很多情形下会非常难以处理，或者根本无法完成。
 
-There are other tricks we can leverage in a `this`-based system, including prototype-delegation (also covered in detail in *You Don't Know JS: this & Object Prototypes*):
+在基于 `this` 的系统中，我们可以使用其他的技巧，包括原型委托（prototype-delegation，在*《你不知道的 JS：this 和对象原型》*中也有详细介绍）：
 
 ```js
 var Auth = {
@@ -998,6 +997,8 @@ Login.doLogin( "fred", "123456" );
 ```
 
 **Note:** `Object.assign(..)` is an ES6+ utility for doing a shallow assignment copy of properties from one or more source objects to a single target object: `Object.assign( target, source1, ... )`.
+
+**注意：** `Object.assign(..)` 是 ES6+ 的一个方法，用于将属性从一个或多个源对象中浅拷贝到另一个目标对象上： `Object.assign( target, source1, ... )`。
 
 In case you're having trouble parsing what this code does: we have two separate objects `Login` and `Auth`, where `Login` performs prototype-delegation to `Auth`. Through delegation and the implicit `this` context sharing, these two objects virtually compose during the `this.authorize()` function call, so that properties/methods on `this` are dynamically shared with the `Auth.authorize(..)` function.
 
