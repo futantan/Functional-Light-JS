@@ -179,7 +179,6 @@ OK，在这一点上已经唠叨的够多的了。
 
 假设你确实需要以类似数组的方式来获取某个位置的参数情况，这有可能是因为想要获取的参数没有对应的形参。我们该如何做到呢？
 
-ES6 to the rescue! Let's declare our function with the `...` operator -- variously referred to as "spread", "rest", or (my preference) "gather":
 ES6 前来救驾！让我们使用 `...` 操作符——有多种称呼，像“spred”，“rest”或者（我更喜欢的）“gather”。（译者注：中文一般称为扩展）
 
 ```js
@@ -245,7 +244,7 @@ foo( 1, ...arr, 3, ...[4,5] );      // 4
 
 **提示：**实际上，这些方法并非毫无用处。在本书中，我们也有一些代码依赖于它们，但是在绝大部分地方 `...` 将会是我们的不二之选，它更加声明式，也更加易读。
 
-### Parameter Destructuring
+### 参数解构
 
 考虑上一节中的可变参数 `foo(..)`：
 
@@ -582,7 +581,7 @@ foo();                  // HELLO!
 
 根据定义，将其他函数视为值的函数被称为高阶函数。函数式程序员将会一直与它们打交道！
 
-### Keeping Scope
+### 保持作用域
 
 函数在另一个函数作用域内的行为能力，是所有编程中最为强大的东西，特别是在函数式编程中。当内部函数引用外部函数中的变量时，这称为闭包（closure）。
 
@@ -915,7 +914,7 @@ people.map( person =>
 
 **注意：**尽管在实际的产品代码中我不喜欢使用 `=>`，但在进行快速代码验证时非常有用。此外，在本书的其余部分我们将在许多地方使用箭头函数——特别是当我们介绍典型的函数式工具时——这时代码的简洁性是首选，能够优化代码片段有限的排版空间。这种方式是否有助于在你的产品代码中增加可读性，你需要自己做出判断。
 
-## This 是什么？
+## this 是什么？
 
 如果你不熟悉 JavaScript 中 `this` 的绑定，我推荐你阅读我的另一本书*《你不知道的 JS：this 和对象原型》*。在本节中，我假设你了解在函数调用时 `this` 是如何被确定的（四个规则之一）。即使你对 *this* 仍一知半解，好消息是如果想使用函数式的编程方式，我们将会得到的结论是，应该避免使用 `this`。
 
@@ -996,13 +995,11 @@ var Login = Object.assign( Object.create( Auth ), {
 Login.doLogin( "fred", "123456" );
 ```
 
-**Note:** `Object.assign(..)` is an ES6+ utility for doing a shallow assignment copy of properties from one or more source objects to a single target object: `Object.assign( target, source1, ... )`.
-
 **注意：** `Object.assign(..)` 是 ES6+ 的一个方法，用于将属性从一个或多个源对象中浅拷贝到另一个目标对象上： `Object.assign( target, source1, ... )`。
 
-In case you're having trouble parsing what this code does: we have two separate objects `Login` and `Auth`, where `Login` performs prototype-delegation to `Auth`. Through delegation and the implicit `this` context sharing, these two objects virtually compose during the `this.authorize()` function call, so that properties/methods on `this` are dynamically shared with the `Auth.authorize(..)` function.
+如果这段代码理解起来有困难：这里我们有两个独立的 `Login` 和 `Auth` 对象，其中 `Login` 的原型对象是 `Auth`。通过这种委托和隐式的 `this` 上下文共享，在执行 `this.authorize()`  方法调用的时候，这两个对象实际上被组合在了一起，因此 `this` 上的属性、方法与 `Auth.authorize(..)` 方法动态共享。
 
-*This* code doesn't fit with various principles of FP for a variety of reasons, but one of the obvious hitches is the implicit `this` sharing. We could be more explicit about it and keep code closer to FP-friendly style:
+有很多种原因可以表明这段代码与函数式编程的种种原则不符，其中一个最明显的问题是隐式的 `this` 共享。对此我们可以使用更加明确、更加贴近函数式编程风格的方式：
 
 ```js
 // ..
@@ -1027,18 +1024,18 @@ doLogin(user,pw) {
 // ..
 ```
 
-From my perspective, the problem is not with using objects to organize behavior. It's that we're trying to use implicit input instead of being explicit about it. When I'm wearing my FP hat, I want to leave `this` stuff on the shelf.
+在我看来，问题不在于使用对象来组织行为。而是我们在尝试使用隐式的输入而不是显式的参数。当我在使用函数式编程的时候，我会避免使用 `this`。
 
-## Summary
+## 总结
 
-Functions are powerful.
+函数十分强大。
 
-But let's be clear what a function is. It's not just a collection of statements/operations. Specifically, a function needs one or more inputs (ideally, just one!) and an output.
+但是让我们弄清楚函数的本质是什么。它不只是一堆语句/操作的集合。具体的说，一个函数需要一个或多个输入（理想情况下还有一个！）以及以输出。
 
-Functions inside of functions can have closure over outer variables and remember them for later. This is one of the most important concepts in all of programming, and a fundamental foundation of FP.
+函数内部的函数可以拥有外部变量的闭包，并记住它们从而可以之后使用。这是所有编程概念中最为重要的一个，也是函数式编程的基础。
 
-Be careful of anonymous functions, especially `=>` arrow functions. They're convenient to write, but they shift the cost from author to reader. The whole reason we're studying FP here is to write more readable code, so don't be so quick to jump on that bandwagon.
+要小心匿名函数，尤其是 `=>` 箭头函数。虽然它们写起来很方便，但是将成本从代码编写者转嫁到了阅读者身上。我们学习函数式编程的原因就是为了书写可读性更佳的代码，所以别忙目地赶时髦而丢失了可读性。
 
-Don't use `this`-aware functions. Just don't.
+不要使用依赖于 `this` 的函数。别这么干。
 
-You should now be developing a clear and colorful perspective in your mind of what *function* means in Functional Programming. It's time to start wrangling functions to get them to interoperate, and the next chapter teaches you a variety of critical techniques you'll need along the way.
+现在对于*函数*在函数式编程中意味着什么有了清晰分明的认知。是时候开始开始实践使用函数了，下一章将会教授以后用得到的各种技术。
