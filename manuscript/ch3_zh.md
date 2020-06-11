@@ -1,16 +1,16 @@
-# Functional-Light JavaScript
+# JavaScript 函数式编程之光
 
-# Chapter 3: Managing Function Inputs
+# 第三章：管理函数输入
 
-[Chapter 2](ch2.md) explored the core nature of JS `function`s, and laid the foundation for what makes a `function` an FP *function*. But to leverage the full power of FP, we also need patterns and practices for manipulating functions to shift and adjust their interactions -- to bend them to our will.
+[第二章](ch2.md) 探索了 JS 中 `function` 的核心本质，并为 `function` 成为函数式编程中的函数奠定了基础。但是，为了充分发挥函数式编程的威力，我们需要一些模式和实践经验，从而将函数塑造和调整为我们期望的样子。
 
-Specifically, our attention for this chapter will be on the parameter inputs of functions. As you bring functions of all different shapes together in your programs, you'll quickly face incompatibilities in the number/order/type of inputs, as well as the need to specify some inputs at different times than others.
+具体来说，本章的重点将放在函数的输入上。随着在程序中不断地引入各种类型的函数，你很快就会发现有些函数的参数个数、参数顺序或参数类型并不符合我们的期望，有时我们又期望给函数指定一些输入参数，这些问题接踵而至。
 
-As a matter of fact, for stylistic purposes of readability, sometimes you'll want to define functions in a way that hides their inputs entirely!
+实际上，有时为了提高代码可读性，你可能期望以完全隐藏输入参数的形式来定义一个函数！
 
-These kinds of techniques are absolutely essential to making functions truly *function*-al.
+这些是让函数更加*函数式*必不可少的技巧。
 
-## All for One
+## 万象归一
 
 Imagine you're passing a function to a utility, where the utility will send multiple arguments to that function. But you may only want the function to receive a single argument.
 
