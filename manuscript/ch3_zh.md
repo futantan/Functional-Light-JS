@@ -159,17 +159,17 @@ p1.then( foo ).then( constant( p2 ) ).then( bar );
 
 ## Adapting Arguments to Parameters
 
-There are a variety of patterns and tricks we can use to adapt a function's signature to match the kinds of arguments we want to provide to it.
+有很多种模式和技巧可以用来调整一个函数的签名，从而符合我们对一个函数参数的要求。
 
-Recall [this function signature from Chapter 2](ch2.md/#user-content-funcparamdestr) which highlights using array parameter destructuring:
+回想一下[第二章中 foo 函数的签名](ch2.md/#user-content-funcparamdestr) 它强调了数组解构的参数用法：
 
 ```js
 function foo( [x,y,...args] = [] ) {
 ```
 
-This pattern is handy if an array will be passed in but you want to treat its contents as individual parameters. `foo(..)` is thus technically unary -- when it's executed, only one argument (an array) will be passed to it. But inside the function, you get to address different inputs (`x`, `y`, etc) individually.
+如果入参是一个数组，而你又想将数组的内容视为独立的参数的话，那么这种模式是很方便的。`foo(..)` 从技术上的角度是一元函数——执行它时，只有一个参数（数组）会被传入。但是在函数的内部，可以分别处理不同的输入，例如 `x`，`y` 等等。
 
-However, sometimes you won't have the ability to change the declaration of the function to use array parameter destructuring. For example, imagine these functions:
+有时你期望使用函数解构的参数接口，但是可能没有办法做到。例如，假设有以下函数：
 
 ```js
 function foo(x,y) {
@@ -180,16 +180,16 @@ function bar(fn) {
     fn( [ 3, 9 ] );
 }
 
-bar( foo );         // fails
+bar( foo );         // 调用失败
 ```
 
-Do you spot why `bar(foo)` fails?
+发现为什么 `bar(foo)` 失败了吗？
 
-The array `[3,9]` is sent in as a single value to `fn(..)`, but `foo(..)` expects `x` and `y` separately. If we could change the declaration of `foo(..)` to be `function foo([x,y]) { ..`, we'd be fine. Or, if we could change the behavior of `bar(..)` to make the call as `fn(...[3,9])`, the values `3` and `9` would be passed in individually.
+数组 `[3,9]` 作为一个单一的值传给 `fn(..)`，但是 `foo(..)` 期望的是 `x` 和 `y` 两个值。如果我们可以将 `foo(..)` 的声明改为 `function foo([x,y]) { ..` 的话，就工作了。或者，我们可以改变 `bar(..)` 的行为，让它以 `fn(...[3,9])` 的形式来调用，那么 `3` 和 `9` 的值就可以分别被传递过去了。
 
-There will be occasions when you have two functions that are incompatible in this way, and you won't be able to change their declarations/definitions. So, how can you use them together?
+在一些情况下，你可能会有两个函数，而它们的接口是不兼容的，而且你无法改变他们的声明或定义。那么该如何才能够很好地使用它们呢？
 
-We can define a helper to adapt a function so that it spreads out a single received array as its individual arguments:
+我们可以定义一个辅助函数，对该函数进行适配，从而将接收到的单个数组参数，展开，并作为一个个的独立参数传入：
 
 <a name="spreadargs"></a>
 
@@ -200,16 +200,17 @@ function spreadArgs(fn) {
     };
 }
 
-// or the ES6 => arrow form
+// 或者使用 ES6 的 => 箭头函数形式
 var spreadArgs =
     fn =>
         argsArr =>
             fn( ...argsArr );
 ```
 
-**Note:** I called this helper `spreadArgs(..)`, but in libraries like Ramda it's commonly called `apply(..)`.
+**注意：** 我将这个辅助函数命名为 `spreadArgs(..)`，但是在一些像 Ramda 之类的库中，通常将其称之为 `apply(..)`。
 
 Now we can use `spreadArgs(..)` to adapt `foo(..)` to work as the proper input to `bar(..)`:
+现在我们可以使用 `spreadArgs(..)` 来适配 `foo(..)`，从而可以作为 `bar(..)` 的正确输入：
 
 ```js
 bar( spreadArgs( foo ) );           // 12
