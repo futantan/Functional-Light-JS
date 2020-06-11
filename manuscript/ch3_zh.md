@@ -153,8 +153,6 @@ var constant =
 p1.then( foo ).then( constant( p2 ) ).then( bar );
 ```
 
-**Warning:** Although the `() => p2` arrow function version is shorter than `constant(p2)`, I would encourage you to resist the temptation to use it. The arrow function is returning a value from outside of itself, which is a bit worse from the FP perspective. We'll cover the pitfalls of such actions later in the book (see [Chapter 5](ch5.md)).
-
 **警告：** 尽管 `() => p2` 箭头函数的版本比 `constant(p2)` 更短，我还是鼓励你抑制住使用它的冲动。这个箭头函数返回了一个在该函数函数外部的值，从函数式的角度来看是不太好的。在本书后面的内容中，会介绍这类行为的陷阱（参考[第五章](ch5.md)）。
 
 ## Adapting Arguments to Parameters
