@@ -50,8 +50,6 @@ var unary =
 
 对于函数签名 `parseInt(str,radix)` 很显然，当 `map(..)` 函数将 `index` 作为第二个参数传入的时候，会被 `parseInt(..)` 理解为 `radix`，这不是我们期望的行为。
 
-`unary(..)` creates a function that will ignore all but the first argument passed to it, meaning the passed-in `index` is never received by `parseInt(..)` and mistaken as the `radix`:
-
 `unary(..)` 创建一个函数，它会忽略除第一个之外的其他参数，这意味着传入的 `index` 参数不会被 `parseInt(..)` 接收到，也就不会被误认为是 `radix`：
 
 <a name="mapunary"></a>
@@ -61,7 +59,7 @@ var unary =
 // [1,2,3]
 ```
 
-### One on One
+### 一一得一
 
 说到一元函数，函数式工具箱中还有另一个基础的实用工具，它接收一个参数，直接原封不动地返回这个值，也不做任何其他的事情：
 
@@ -76,9 +74,9 @@ var identity =
         v;
 ```
 
-This utility looks so simple as to hardly be useful. But even simple functions can be helpful in the world of FP. Like they say in acting: there are no small parts, only small actors.
+这个工具看起来如此的简单，好像没什么用。但是即使是非常简单的函数在函数式编程的领域也可以发挥很大的作用。就像表演领域中所说的：有没小角色，只有小演员。
 
-For example, imagine you'd like to split up a string using a regular expression, but the resulting array may have some empty values in it. To discard those, we can use JS's `filter(..)` array operation (see [Chapter 9, "Filter"](ch9.md/#filter)) with `identity(..)` as the predicate:
+例如，假设你想使用正则表达式来拆分字符串，但是拆分后的得到的数组中含有一些空值。为了丢弃这些值，我们可以使用 JS 中数组的`filter(..)` 操作（参考[第九章 “过滤操作”](ch9.md/#filter)），将 `identity(..)` 函数作为谓词逻辑传入：
 
 ```js
 var words = "   Now is the time for all...  ".split( /\s|\b/ );
@@ -89,11 +87,11 @@ words.filter( identity );
 // ["Now","is","the","time","for","all","..."]
 ```
 
-Because `identity(..)` simply returns the value passed to it, JS coerces each value into either `true` or `false`, and that determines whether to keep or exclude each value in the final array.
+因为 `identity(..)` 所做的知识简单地将传入的值返回，JS 将每个值强转为 `true` 或 `false` ，从而确定在最终的数组中是保留该值还是丢弃掉。
 
-**Tip:** Another unary function that can be used as the predicate in the previous example is JS's built-in `Boolean(..)` function, which explicitly coerces a value to `true` or `false`.
+**提示：**再上一个示例中，另一个可以作为谓词的是 JS 内置的 `Boolean(..)` 函数，该函数现实地将值强转为 `true` 或 `false`。
 
-Another example of using `identity(..)` is as a default function in place of a transformation:
+另一个 `identity(..)` 函数的应用场景是作为转换函数的默认参数：
 
 ```js
 function output(msg,formatFn = identity) {
@@ -111,25 +109,29 @@ output( "Hello World" );            // Hello World
 
 You also may see `identity(..)` used as a default transformation function for `map(..)` calls or as the initial value in a `reduce(..)` of a list of functions; both of these utilities will be covered in [Chapter 9](ch9.md).
 
-### Unchanging One
+你可能还会看到其他的使用场景，比如将 `identity(..)` 作为 `map(..)` 中转换函数的默认值，或者作为列表的 `reduce(..)` 函数调用的初始值，这两种会在[第九章](ch9.md)中讲解。
 
-Certain APIs don't let you pass a value directly into a method, but require you to pass in a function, even if that function literally just returns the value. One such API is the `then(..)` method on JS Promises:
+### 一成不变
+
+有些 API 的方法要求传入而一个函数而不是一个值，虽然函数只是简单地返回了这个值。一个例子是 JS 中 Promise 的 `then(..)` 方法：
 
 ```js
-// doesn't work:
+// 不工作：
 p1.then( foo ).then( p2 ).then( bar );
 
-// instead:
+// 工作：
 p1.then( foo ).then( function(){ return p2; } ).then( bar );
 ```
 
 Many claim that ES6 `=>` arrow functions are the best "solution":
 
+许多人认为 ES6 的 `=>` 箭头函数是最好的“解决方案”：
+
 ```js
 p1.then( foo ).then( () => p2 ).then( bar );
 ```
 
-But there's an FP utility that's more well suited for the task:
+但是函数式的工具库中有一个更适合于这种任务：
 
 ```js
 function constant(v) {
@@ -138,20 +140,22 @@ function constant(v) {
     };
 }
 
-// or the ES6 => form
+// 或者使用 ES6 => 的形式
 var constant =
     v =>
         () =>
             v;
 ```
 
-With this tidy little FP utility, we can solve our `then(..)` annoyance properly:
+利用这个函数式工具，我们可以更优雅地解决 `then(..)` 调用的烦恼：
 
 ```js
 p1.then( foo ).then( constant( p2 ) ).then( bar );
 ```
 
 **Warning:** Although the `() => p2` arrow function version is shorter than `constant(p2)`, I would encourage you to resist the temptation to use it. The arrow function is returning a value from outside of itself, which is a bit worse from the FP perspective. We'll cover the pitfalls of such actions later in the book (see [Chapter 5](ch5.md)).
+
+**警告：** 尽管 `() => p2` 箭头函数的版本比 `constant(p2)` 更短，我还是鼓励你抑制住使用它的冲动。这个箭头函数返回了一个在该函数函数外部的值，从函数式的角度来看是不太好的。在本书后面的内容中，会介绍这类行为的陷阱（参考[第五章](ch5.md)）。
 
 ## Adapting Arguments to Parameters
 
