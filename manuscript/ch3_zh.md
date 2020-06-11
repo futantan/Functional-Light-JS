@@ -12,9 +12,9 @@
 
 ## 万象归一
 
-Imagine you're passing a function to a utility, where the utility will send multiple arguments to that function. But you may only want the function to receive a single argument.
+假设你要将一个函数作为参数传给一个工具函数，而这个工具函数在调用所传入的函数时，会给多个参数。而你只希望这个函数接收一个参数。
 
-We can design a simple helper that wraps a function call to ensure only one argument will pass through. Since this is effectively enforcing that a function is treated as unary, let's name it as such:
+我们可以设计一个简单的帮助程序，来将函数包装成一个只接收一个参数的函数调用。由于这种做法实际上强制将函数视为一元（unary）函数，所以我们也可以据此命名：
 
 <a name="unary"></a>
 
@@ -28,6 +28,8 @@ function unary(fn) {
 
 Many FPers tend to prefer the shorter `=>` arrow function syntax for such code (see [Chapter 2, "Functions without `function`"](ch2.md/#functions-without-function)), such as:
 
+对这类代码，很多函数式程序员更倾向于使用更简洁的 `=>` 箭头函数（参考  [第二章，“没有 `function` 关键词的函数”](ch2.md/#没有 `function` 关键词的函数)））：
+
 ```js
 var unary =
     fn =>
@@ -35,20 +37,22 @@ var unary =
             fn( arg );
 ```
 
-**Note:** No question this is more terse, sparse even. But I personally feel that whatever it may gain in symmetry with the mathematical notation, it loses more in overall readability with the functions all being anonymous, and by obscuring the scope boundaries, making deciphering closure a little more cryptic.
+**注意：** 毫无疑问，这种写法更简洁，代码量也更少。但是我个人认为，虽然它和数学符号的表示更相近，但是这些函数都是匿名的，模糊了范围边界，使得闭包更加晦涩难懂。比起代码阅读性的丢失，这一点好处显得得不偿失。
 
-A commonly cited example for using `unary(..)` is with the `map(..)` utility (see [Chapter 9, "Map"](ch9.md/#map)) and `parseInt(..)`. `map(..)` calls a mapper function for each item in a list, and each time it invokes the mapper function, it passes in three arguments: `value`, `idx`, `arr`.
+对于 `unary(..)` 函数，一个被广泛使用的例子是 `map(..)` （参考[第九章，“Map”](ch9.md/#map))以及 `parseInt(..)` 。 `map(..)` 为列表中的每一项调用一个 mapper 函数，每次调用 mapper 函数的时候，会传入三个参数： `value`, `idx`, `arr`。
 
-That's usually not a big deal, unless you're trying to use something as a mapper function that will behave incorrectly if it's passed too many arguments. Consider:
+这种行为通常不是一个问题，除非这个 mapper 函数在传入过多参数的时候会出现异常行为。考虑如下代码：
 
 ```js
 ["1","2","3"].map( parseInt );
 // [1,NaN,NaN]
 ```
 
-For the signature `parseInt(str,radix)`, it's clear that when `map(..)` passes `index` in the second argument position, it's interpreted by `parseInt(..)` as the `radix`, which we don't want.
+对于函数签名 `parseInt(str,radix)` 很显然，当 `map(..)` 函数将 `index` 作为第二个参数传入的时候，会被 `parseInt(..)` 理解为 `radix`，这不是我们期望的行为。
 
 `unary(..)` creates a function that will ignore all but the first argument passed to it, meaning the passed-in `index` is never received by `parseInt(..)` and mistaken as the `radix`:
+
+`unary(..)` 创建一个函数，它会忽略除第一个之外的其他参数，这意味着传入的 `index` 参数不会被 `parseInt(..)` 接收到，也就不会被误认为是 `radix`：
 
 <a name="mapunary"></a>
 
@@ -59,14 +63,14 @@ For the signature `parseInt(str,radix)`, it's clear that when `map(..)` passes `
 
 ### One on One
 
-Speaking of functions with only one argument, another common base utility in the FP toolbelt is a function that takes one argument and does nothing but return the value untouched:
+说到一元函数，函数式工具箱中还有另一个基础的实用工具，它接收一个参数，直接原封不动地返回这个值，也不做任何其他的事情：
 
 ```js
 function identity(v) {
     return v;
 }
 
-// or the ES6 => arrow form
+// 或者使用 ES6 => 箭头函数的形式
 var identity =
     v =>
         v;
