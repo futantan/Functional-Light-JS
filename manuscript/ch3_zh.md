@@ -155,7 +155,7 @@ p1.then( foo ).then( constant( p2 ) ).then( bar );
 
 **警告：** 尽管 `() => p2` 箭头函数的版本比 `constant(p2)` 更短，我还是鼓励你抑制住使用它的冲动。这个箭头函数返回了一个在该函数函数外部的值，从函数式的角度来看是不太好的。在本书后面的内容中，会介绍这类行为的陷阱（参考[第五章](ch5.md)）。
 
-## Adapting Arguments to Parameters
+## 参数适配
 
 有很多种模式和技巧可以用来调整一个函数的签名，从而符合我们对一个函数参数的要求。
 
@@ -207,16 +207,15 @@ var spreadArgs =
 
 **注意：** 我将这个辅助函数命名为 `spreadArgs(..)`，但是在一些像 Ramda 之类的库中，通常将其称之为 `apply(..)`。
 
-Now we can use `spreadArgs(..)` to adapt `foo(..)` to work as the proper input to `bar(..)`:
-现在我们可以使用 `spreadArgs(..)` 来适配 `foo(..)`，从而可以作为 `bar(..)` 的正确输入：
+现在我们可以使用 `spreadArgs(..)` 来适配 `foo(..)`，从而可以将其作为 `bar(..)` 的正确输入：
 
 ```js
 bar( spreadArgs( foo ) );           // 12
 ```
 
-It won't seem clear yet why these occasions arise, but you will see them often. Essentially, `spreadArgs(..)` allows us to define functions that `return` multiple values via an array, but still have those multiple values treated independently as inputs to another function.
+虽然还不清楚为什么会出现需要参数适配的情况，但是你会经常遇到它们。本质上来说，`spreadArgs(..)` 允许我们定义一个能够通过数组 `return` 多个值的函数，而这些值分别作为另一个函数的独立参数使用。
 
-While we're talking about a `spreadArgs(..)` utility, let's also define a utility to handle the opposite action:
+既然聊到了 `spreadArgs(..)` 工具，让我们再定义一个相反功用的工具：
 
 ```js
 function gatherArgs(fn) {
@@ -225,17 +224,16 @@ function gatherArgs(fn) {
     };
 }
 
-// or the ES6 => arrow form
+// 或者使用 ES6 => 的形式
 var gatherArgs =
     fn =>
         (...argsArr) =>
             fn( argsArr );
 ```
 
-**Note:** In Ramda, this utility is referred to as `unapply(..)`, being that it's the opposite of `apply(..)`. I think the "spread"/"gather" terminology is a little more descriptive for what's going on.
+**注意：** 在 Ramda 中，这个工具函数被称为 `unapply(..)`，因为它是 `apply(..)` 相对的函数。我个人认为“spread”和“gather” 这两个术语更具表意性。
 
-We can use this utility to gather individual arguments into a single array, perhaps because we want to adapt a function with array parameter destructuring to another utility that passes arguments separately. We will [cover `reduce(..)` more fully in Chapter 9](ch9.md/#reduce); in short, it repeatedly calls its reducer function with two individual parameters, which we can now *gather* together:
-
+有时一个函数接收一个解构数组作为参数，而我们期望将其适配成一个分别处理各个参数的函数，这时我们可以使用这个工具，将各个独立的参数收集到一个数组中。我们会在[第九章中更详细地介绍 `reduce(..)`](ch9.md/#reduce)；简而言之，它将反复调用 reducer 函数，并传入两个独立的参数，我们可以将这些参数 *gather* 起来：
 ```js
 function combineFirstTwo([ v1, v2 ]) {
     return v1 + v2;
