@@ -303,19 +303,19 @@ var partial =
             fn( ...presetArgs, ...laterArgs );
 ```
 
-**Tip:** Don't just take this snippet at face value. Pause for a few moments to digest what's going on with this utility. Make sure you really *get it*.
+**提示：** 不要仅停留在表面。稍作驻足，看看这个函数究竟在做什么。确保能够真正*理解它*。
 
-The `partial(..)` function takes an `fn` for which function we are partially applying. Then, any subsequent arguments passed in are gathered into the `presetArgs` array and saved for later.
+`partial(..)` 函数接收一个我们将要进行部分应用的 `fn` 函数。然后，任何所传入的后续参数都将被收集到 `presetArgs` 数组中，保存并以备后用。
 
-A new inner function (called `partiallyApplied(..)` just for clarity) is created and `return`ed; the inner function's own arguments are gathered into an array called `laterArgs`.
+一个新的内部函数（为了清晰起见，起名为 `partiallyApplied(..)`）被创建并被 `return`；内部函数自己的参数将被收集到名为 `laterArgs` 的数组中。
 
-Notice the references to `fn` and `presetArgs` inside this inner function? How does that work? After `partial(..)` finishes running, how does the inner function keep being able to access `fn` and `presetArgs`? If you answered **closure**, you're right on track! The inner function `partiallyApplied(..)` closes over both the `fn` and `presetArgs` variables so it can keep accessing them later, no matter where the function runs. This is why understanding closure is critical!
+注意到内部函数对 `fn` 和 `presetArgs` 的引用了吗？这是怎么工作的？在 `partial(..)` 调用完成之后，内部的函数为何能够继续访问 `fn` 和 `presetArgs`？如果你的回答是**闭包**，完全正确！内部函数 `partiallyApplied(..)` 同时捕获（close over） `fn` 和 `presetArgs` 两个变量，因此无论函数在喊出运行，都可以继续保持对它们的引用。这就是为什么理解闭包至关重要的原因。
 
-When the `partiallyApplied(..)` function is later executed somewhere else in your program, it uses the closed over `fn` to execute the original function, first providing any of the (closed over) `presetArgs` partial application arguments, then any further `laterArgs` arguments.
+随后，当在程序的其他地方执行 `partiallyApplied(..)` 函数的时候，它使用闭包持有的 `fn` 来执行原来的函数，首先提供捕获的 `presetArgs` 作为一部分的运行参数，继而是 `laterArgs` 参数。
 
-If any of that was confusing, stop and go re-read it. Trust me, you'll be glad you did as we get further into the text.
+如果上面的任何一点让你有所疑惑，请停下脚步再读一次。相信我，随着内容的不断深入，你会庆幸自己这么做了。
 
-Let's now use the `partial(..)` utility to make those earlier partially applied functions:
+现在让我们使用 `partial(..)` 工具来实现之前部分应用的函数：
 
 ```js
 var getPerson = partial( ajax, "http://some.api/person" );
@@ -323,7 +323,7 @@ var getPerson = partial( ajax, "http://some.api/person" );
 var getOrder = partial( ajax, "http://some.api/order" );
 ```
 
-Take a moment to consider the shape/internals of `getPerson(..)`. It will look sorta like this:
+停下来想一想 `getPerson(..)` 的内部实现。它看起来像是这样：
 
 ```js
 var getPerson = function partiallyApplied(...laterArgs) {
@@ -331,28 +331,28 @@ var getPerson = function partiallyApplied(...laterArgs) {
 };
 ```
 
-The same will be true of `getOrder(..)`. But what about `getCurrentUser(..)`?
+`getOrder(..)` 也是如此。`getCurrentUser(..)` 函数又会如何呢？
 
 ```js
-// version 1
+// 版本 1
 var getCurrentUser = partial(
     ajax,
     "http://some.api/person",
     { user: CURRENT_USER_ID }
 );
 
-// version 2
+// 版本 2
 var getCurrentUser = partial( getPerson, { user: CURRENT_USER_ID } );
 ```
 
-We can either define `getCurrentUser(..)` with both the `url` and `data` arguments specified directly (version 1), or define `getCurrentUser(..)` as a partial application of the `getPerson(..)` partial application, specifying only the additional `data` argument (version 2).
+我们可以在定义 `getCurrentUser(..)` 函数的时候，直接同时指定 `url` 和 `data`（版本 1），或者将通过 `getPerson(..)` 的部分应用来定义 `getCurrentUser(..)`，仅指定一个额外的参数 `data` 参数（版本 2）。
 
-Version 2 is a little cleaner to express because it reuses something already defined. As such, I think it fits a little closer to the spirit of FP.
+因为重用了已经定义好的函数，版本 2 的表达会更加清晰简洁。也是这个原因，我认为它更符合函数式编程的精神。
 
-Just to make sure we understand how these two versions will work under the covers, they look respectively kinda like:
+为了确保我们了解这两个版本在幕后是如何工作的，它们看上去分别像是：
 
 ```js
-// version 1
+// 版本 1
 var getCurrentUser = function partiallyApplied(...laterArgs) {
     return ajax(
         "http://some.api/person",
@@ -361,7 +361,7 @@ var getCurrentUser = function partiallyApplied(...laterArgs) {
     );
 };
 
-// version 2
+// 版本 2
 var getCurrentUser = function outerPartiallyApplied(...outerLaterArgs){
     var getPerson = function innerPartiallyApplied(...innerLaterArgs){
         return ajax( "http://some.api/person", ...innerLaterArgs );
@@ -371,11 +371,11 @@ var getCurrentUser = function outerPartiallyApplied(...outerLaterArgs){
 }
 ```
 
-Again, stop and re-read those code snippets to make sure you understand what's going on there.
+同样，稍作停留重读一下这些代码片段，以确保了解它们的工作原理。
 
-**Note:** Version 2 has an extra layer of function wrapping involved. That may smell strange and unnecessary, but this is just one of those things in FP that you'll want to get really comfortable with. We'll be wrapping many layers of functions onto each other as we progress through the text. Remember, this is *function*al programming!
+**注意：**版本 2 中有含有一个额外的包装函数。看起来可能有些奇怪和多此一举，但是这种操作在函数式编程中很常见，也是需要适应的事情之一。在本书内容的推进，我们将会经常使用包装函数。记住，这是*函数*式编程！
 
-Let's take a look at another example of the usefulness of partial application. Consider an `add(..)` function which takes two arguments and adds them together:
+让我们看一下部分应用的另一个例子。考虑一个 `add(..)` 函数，它接收两个参数并将它们相加：
 
 ```js
 function add(x,y) {
@@ -384,6 +384,7 @@ function add(x,y) {
 ```
 
 Now imagine we'd like take a list of numbers and add a certain number to each of them. We'll use the `map(..)` utility (see [Chapter 9, "Map"](ch9.md/#map)) built into JS arrays:
+现在想想一下，我们想要将一个数字列表中的每一个数字加上一个特定的数。我们将使用 JS 数组内置的 `map(..)` 函数 （参见[第九章 “Map”](ch9.md/#map)）：
 
 ```js
 [1,2,3,4,5].map( function adder(val){
@@ -392,16 +393,16 @@ Now imagine we'd like take a list of numbers and add a certain number to each of
 // [4,5,6,7,8]
 ```
 
-The reason we can't pass `add(..)` directly to `map(..)` is because the signature of `add(..)` doesn't match the mapping function that `map(..)` expects. That's where partial application can help us: we can adapt the signature of `add(..)` to something that will match:
+我们之所以不能将 `add(..)` 直接传给 `map(..)` 是因为 `add(..)` 的函数签名和 `map(..)` 所期望的不符。这就是部分应用可以提供帮助的地方：我们可以将 `add(..)` 的签名修改为期望的样子：
 
 ```js
 [1,2,3,4,5].map( partial( add, 3 ) );
 // [4,5,6,7,8]
 ```
 
-The `partial(add,3)` call produces a new unary function which is expecting only one more argument.
+`partial(add,3)` 调用产生一个新的一元函数，该函数只接收一个参数。
 
-The `map(..)` utility will loop through the array (`[1,2,3,4,5]`) and repeatedly call this unary function, once for each of those values, respectively. So, the calls made will effectively be `add(3,1)`, `add(3,2)`, `add(3,3)`, `add(3,4)`, and `add(3,5)`. The array of those results is `[4,5,6,7,8]`.
+`map(..)` 函数将遍历数组（`[1,2,3,4,5]`）并重复调用该一元函数，每次将其中的一个值应用到该函数上。所以调用实际上为 `add(3,1)`，`add(3,2)`，`add(3,3)`，`add(3,4)` 和 `add(3,5)`。调用的结果是数组 `[4,5,6,7,8]`。
 
 ### `bind(..)`
 
