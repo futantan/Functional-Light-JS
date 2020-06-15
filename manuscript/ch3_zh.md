@@ -245,9 +245,9 @@ function combineFirstTwo([ v1, v2 ]) {
 
 ## Some Now, Some Later
 
-If a function takes multiple arguments, you may want to specify some of those up front and leave the rest to be specified later.
+如果一个函数接收多个参数，你可能期望预先指定其中的某一些，其余的参数以后再决定。
 
-Consider this function:
+考虑如下函数：
 
 ```js
 function ajax(url,data,callback) {
@@ -255,11 +255,11 @@ function ajax(url,data,callback) {
 }
 ```
 
-Let's imagine you'd like to set up several API calls where the URLs are known up front, but the data and the callback to handle the response won't be known until later.
+假设你想要预设几个 API 调用，这些调用中的 URL 是预先已知的，而 data 和处理响应的 callback 需要后面才能够定下来。
 
-Of course, you can just defer making the `ajax(..)` call until all the bits are known, and refer to some global constant for the URL at that time. But another way is to create a function reference that already has the `url` argument preset.
+当然你可以推迟对 `ajax(..)` 的调用，直到所有参数都已确定，对于 URL，可以引用一些全局常量。而另一种方式是创建一个持有预设的 `url` 引用的的函数。
 
-What we're going to do is make a new function that still calls `ajax(..)` under the covers, and it manually sets the first argument to the API URL you care about, while waiting to accept the other two arguments later:
+我们要做的是创建一个新函数，它在底层仍然会调用 `ajax(..)`，并手动将第一个参数设置为需要的 API URL，同时等待着接收另外的两个参数：
 
 ```js
 function getPerson(data,cb) {
@@ -271,7 +271,7 @@ function getOrder(data,cb) {
 }
 ```
 
-Manually specifying these function call wrappers is certainly possible, but it may get quite tedious, especially if there will also be variations with different arguments preset, like:
+当然可以像上面这样手动指定这些包装函数，但是这样的代码会很麻烦，尤其是当预设的参数结构可能不同的时候，例如：
 
 ```js
 function getCurrentUser(cb) {
@@ -279,15 +279,15 @@ function getCurrentUser(cb) {
 }
 ```
 
-One practice an FPer gets very used to is looking for patterns where we do the same sorts of things repeatedly, and trying to turn those actions into generic reusable utilities. As a matter of fact, I'm sure that's already the instinct for many of you readers, so that's not uniquely an FP thing. But it's unquestionably important for FP.
+函数式程序员的常用做法是在重复代码中寻找通用模式，并尝试将这些操作转换为通用的工具。事实上，我相信对于很多读者来说，这已经是一种代码本能，不是函数式程序员所专有的。但对于函数式编程来说，这种做法毫无疑问非常重要。
 
-To conceive such a utility for argument presetting, let's examine conceptually what's going on, not just looking at the manual implementations shown here.
+为了构思这样一个用于参数预设的函数，除了观察上面手动实现的代码之外，让我们从概念出发，审视发生了什么。
 
-One way to articulate what's going on is that the `getOrder(data,cb)` function is a *partial application* of the `ajax(url,data,cb)` function. This terminology comes from the notion that arguments are *applied* to parameters at the function call-site. And as you can see, we're only applying some of the arguments up front -- specifically, the argument for the `url` parameter -- while leaving the rest to be applied later.
+问题的一种解释是：`getOrder(data,cb)` 是函数 `ajax(url,data,cb)` 的*部分应用（partial application）*。在函数被调用时，实参被*应用*到形参上，这个术语也是源自于此。正如你所看到的，我们仅应用了前面的某些参数——具体来说就是 `url` 参数——而其余部分在将来再被应用。
 
-To be a tiny bit more formal about this pattern, partial application is strictly a reduction in a function's arity; remember, that's the number of expected parameter inputs. We reduced the original `ajax(..)` function's arity from 3 to 2 for the `getOrder(..)` function.
+这种模式的更正式定义是：部分应用严格地说是函数参数个数（artity）的规约；记住，个数指的是所期望的形参的数量。对于 `getOrder(..)` 函数，我们将原始的 `ajax(..)` 函数的参数个数从 3 减少到了 2。
 
-Let's define a `partial(..)` utility:
+让我们定义一个 `partial(..)` 工具函数：
 
 ```js
 function partial(fn,...presetArgs) {
@@ -296,7 +296,7 @@ function partial(fn,...presetArgs) {
     };
 }
 
-// or the ES6 => arrow form
+// 或者使用 ES6 => 箭头函数形式
 var partial =
     (fn,...presetArgs) =>
         (...laterArgs) =>
