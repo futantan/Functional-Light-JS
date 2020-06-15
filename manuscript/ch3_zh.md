@@ -454,7 +454,7 @@ var cacheResult = reverseArgs(
 cacheResult( "http://some.api/person", { user: CURRENT_USER_ID } );
 ```
 
-Instead of manually using `reverseArgs(..)` (twice!) for this purpose, we can define a `partialRight(..)` which partially applies the rightmost arguments. Under the covers, it can use the same double-reverse trick:
+与其为此手动使用 `reverseArgs(..)`（两次！），我们可以定义一个 `partialRight(..)` 从最右边开始进行部分应用。在底层，它可以使用同样的反转两次技巧：
 
 <a name="partialright"></a>
 
@@ -469,11 +469,11 @@ var cacheResult = partialRight( ajax, function onResult(obj){
     cache[obj.id] = obj;
 });
 
-// later:
+// 随后：
 cacheResult( "http://some.api/person", { user: CURRENT_USER_ID } );
 ```
 
-Another more straightforward (and certainly more performant) implementation of `partialRight(..)` that doesn't use the double-reverse trick:
+还有一种 `partialRight(..)` 的实现，它不使用两次反转技巧，更为直接（当然性能也更好）：
 
 ```js
 function partialRight(fn,...presetArgs) {
@@ -482,16 +482,16 @@ function partialRight(fn,...presetArgs) {
     };
 }
 
-// or the ES6 => arrow form
+// 或者使用 ES6 => 箭头函数形式
 var partialRight =
     (fn,...presetArgs) =>
         (...laterArgs) =>
             fn( ...laterArgs, ...presetArgs );
 ```
 
-None of these implementations of `partialRight(..)` guarantee that a specific parameter will receive a specific partially applied value; it only ensures that the partially applied value(s) appear as the rightmost (aka, last) argument(s) passed to the original function.
+这些 `partialRight(..)` 的实现都不能保证特定的形参将会接收到一个特定的部分应用值；它只能保证部分应用的值出作为最右边（最后一个）参数传递给原始函数。
 
-For example:
+例如：
 
 ```js
 function foo(x,y,z,...rest) {
