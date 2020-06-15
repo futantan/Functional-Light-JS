@@ -406,23 +406,24 @@ Now imagine we'd like take a list of numbers and add a certain number to each of
 
 ### `bind(..)`
 
-JavaScript functions all have a built-in utility called `bind(..)`. It has two capabilities: presetting the `this` context and partially applying arguments.
+JavaScript 的函数都拥有一个内置的 `bind(..)` 工具。它有两个功能：预设 `this` 的值和部分应用一些参数。
 
-I think it's incredibly misguided to conflate these two capabilities in one utility. Sometimes you'll want to hard-bind the `this` context and not partially apply arguments. Other times you'll want to partially apply arguments but not care about `this` binding at all. I have never needed both at the same time.
+我认为将这两种功能合并在一个函数中非常令人误解。有时你会想要硬绑定 `this` 上下文的值，但不用部分应用参数。有时又只想部分应用某些参数，但是不关心 `this` 的绑定。我从未同时使用这两种功能。
 
-The latter scenario (partial application without setting `this` context) is awkward because you have to pass an ignorable placeholder for the `this`-binding argument (the first one), usually `null`.
+后一种情况（部分应用参数，但是不设置 `this`）很尴尬，因为你必须为 `this` （第一个参数）传递一个可忽略的占位符，通常为 `null`。
 
-Consider:
+考虑如下代码：
 
 ```js
 var getPerson = ajax.bind( null, "http://some.api/person" );
 ```
 
-That `null` just bugs me to no end. Despite this *this* annoyance, it's mildly convenient that JS has a built-in utility for partial application. However, most FP programmers prefer using the dedicated `partial(..)` utility in their chosen FP library.
+这里的 `null` 让我烦恼不已。尽管这里的 *this* 有点恼火，但是 JS 有个内置的部分应用工具，这一点缺失还是非常方便的。然而，大多是函数式程序员更倾向于使用他们选择的函数式库中专用的 `partial(..)` 函数。
 
-### Reversing Arguments
+### 反转参数
 
 Recall that the signature for our Ajax function is: `ajax( url, data, cb )`. What if we wanted to partially apply the `cb` but wait to specify `data` and `url` later? We could create a utility that wraps a function to reverse its argument order:
+回想一下我们 Ajax 函数的签名：`ajax( url, data, cb )`。如果我们想将 `cb` 参数部分应用，而稍后再指定 `data` 和 `url` 呢？我们可以创建一个工具，它包装一个函数，并将参数的顺序进行反转；
 
 ```js
 function reverseArgs(fn) {
@@ -431,14 +432,14 @@ function reverseArgs(fn) {
     };
 }
 
-// or the ES6 => arrow form
+// 或者使用 ES6 => 箭头函数形式
 var reverseArgs =
     fn =>
         (...args) =>
             fn( ...args.reverse() );
 ```
 
-Now we can reverse the order of the `ajax(..)` arguments, so that we can then partially apply from the right rather than the left. To restore the expected order, we'll then reverse the subsequent partially applied function:
+现在我们可以颠倒 `ajax(..)` 函数的参数顺序，这样我们就可以从右侧而不是左侧进行参数的部分应用。进行部分应用后，为了恢复期望的参数顺序，我们需要再次进行参数反转：
 
 ```js
 var cache = {};
@@ -449,7 +450,7 @@ var cacheResult = reverseArgs(
     } )
 );
 
-// later:
+// 随后：
 cacheResult( "http://some.api/person", { user: CURRENT_USER_ID } );
 ```
 
